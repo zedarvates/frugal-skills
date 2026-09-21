@@ -1,0 +1,40 @@
+---
+name: ingest
+description: "Local-first web scraping and source ingestion — fetch a URL, extract clean text locally (0 cloud tokens), optionally structure it with a local model, and store it in a Qdrant collection (the second-brain 'foundation') for later recall. Use for /web-scraping, /ingest-source, building a knowledge foundation, or recalling past ingested sources. Web fetch + Qdrant over stdlib HTTP."
+license: MIT
+metadata:
+  version: "1.0.0"
+  domain: botte-secrete
+  canonical-name: ingest
+---
+# ingest — scrape the web & build a knowledge foundation, locally
+
+Scraping and ingesting are extraction/transformation — keep them off the cloud.
+
+```bash
+python -m skills.ingest.cli scrape  https://example.com --structure   # local summary+entities
+python -m skills.ingest.cli ingest  https://example.com --collection foundation
+python -m skills.ingest.cli ingest  ./notes.md --file
+python -m skills.ingest.cli search  "topic"  --collection foundation
+```
+
+- **scrape** — fetch (browser UA) + stdlib HTML→text (drops script/style, keeps
+  title). `--structure` asks a LOCAL model for a 3-bullet summary + key entities.
+  **0 cloud tokens.**
+- **ingest** — scrape (or a file/raw text) → reflect locally → upsert into Qdrant
+  (`inference-host.example:6333` by default). Builds the "foundation"/historical store.
+- **search** — recall from a collection.
+
+Embeddings: **auto-resolve a local `/v1/embeddings` endpoint** from the backend
+registry (any reachable backend exposing an embedding model → real semantic
+vectors), falling back to a deterministic hash n-gram (256-dim) when none is
+available — so it always works, **0 cloud tokens** either way. Override with
+`--embed-url`/`--embed-model`. The result reports `embed: endpoint|hash`. Degrades
+gracefully when Qdrant is down (scrape still works).
+
+```bash
+python -m skills.ingest.cli ingest https://example.com --embed-url http://127.0.0.1:1234/v1/embeddings
+```
+
+Exposed via [[llm-mcp]] as `scrape` and `ingest_source`. Related:
+[[hermes-second-brain]] (the foundation concept), `media_loader`, [[auto-router]].
