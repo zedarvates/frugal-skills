@@ -70,9 +70,9 @@ model call anywhere in the path.
 
 Through the Agent Skills CLI, which understands the standard layout:
 
-    npx skills add OWNER/frugal-skills --agent codex
-    npx skills add OWNER/frugal-skills --list
-    npx skills add OWNER/frugal-skills --skill context-budget --yes
+    npx skills add zedarvates/frugal-skills --agent codex
+    npx skills add zedarvates/frugal-skills --list
+    npx skills add zedarvates/frugal-skills --skill context-budget --yes
 
 Or copy any skill directory into your agent's skills folder. A skill is a directory
 containing SKILL.md; nothing else is required.
@@ -87,8 +87,7 @@ containing SKILL.md; nothing else is required.
 
 ## Status
 
-This catalog is being prepared for publication. It is usable today; it is not yet
-finished.
+This catalog is published, and still being completed.
 
 - **Licence:** MIT.
 - **Provenance:** every skill that draws on external work is recorded in
