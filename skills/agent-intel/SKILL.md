@@ -4,7 +4,7 @@ description: "The cross-cutting learning layer — record a retroactive loop for
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: agent_intel
 ---
 # agent-intel — loop distillation, skill RAG, predictive routing

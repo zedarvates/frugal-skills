@@ -4,7 +4,7 @@ description: "Edge vision inference on the Hailo-8 accelerator — object detect
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: hailo-vision
 ---
 # Hailo-8 Vision Pipeline

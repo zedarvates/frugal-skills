@@ -69,7 +69,6 @@
 
 - **agent-cache** — Skip an agent run whose result can be predicted instead of executing it again — three matching strategies: exact hash (same input, same output), code fingerprint (unchanged code, u
 - **cache** — Cache a project's scan result so the first agent scans and the following agents read the cache instead — get_or_scan, a separate audit report slot, a .botte-cache store and a 24 ho
-- **code-fingerprint** — Hash every function, method, class and module (SHA-256 over normalized source) so a re-analysis only touches what actually changed, with a persistent cache under .botte-cache/finge
 - **response-cache** — Cache model responses so a repeated or similar query does not pay for a full call again — an exact hash check first, then semantic similarity through the local vector service, then
 
 ## Agents and orchestration
@@ -96,7 +95,6 @@
 - **llm-mcp** — MCP server that lets Claude Code (or any MCP client) discover and call local LLM servers (LM Studio, Ollama, …) as tools, to offload cheap tasks off the cloud
 - **mcp-gateway** — MCP Gateway — expose toutes les skills Botte comme outils MCP
 - **media-loader** — Extract text from media before any model sees it — video keyframes through the local vision accelerator, audio through local speech to text, image detection/classification/OCR, and
-- **vision-budget** — Deterministic preflight for local full-frame versus ROI visual-token budgets, evidence coverage, verifier fallback, privacy, and cache separation.
 
 ## Prompt and output
 
@@ -133,13 +131,10 @@
 
 - **code-rules** — Token-efficient coding standards — the three taxes to weigh before adding any dependency (latency, security surface, cold start), stdlib-first choices, flat architecture, data-orie
 - **dynamic-workflows** — Orchestration patterns for efficient agents — classify and act, fan out and synthesize, adversarial verification, generate and filter, tournament — each addressing one of three fai
-- **fallow** — Static analysis for JS/TS codebases through the external Fallow CLI — health score with hotspots, dead code, semantic duplication, circular dependencies, PR risk from a diff, and J
-- **fallow-like** — A bundle of nine local static analyzers — dead code, duplication, complexity, secrets, taint and data-flow security, boundaries, feature flags, hot paths and blast radius — with a 
 - **simplify-code** — A three-reviewer parallel pass over a diff — one reviewer on code reuse, one on quality, one on efficiency, each receiving the whole diff and required to cite file:line evidence — 
 
 ## Utilities
 
-- **agent-intel** — The cross-cutting learning layer — record a retroactive loop for distillation, select the skills a task needs (skill RAG), predict the cost of a fix, compress accumulated agent mem
 - **bootstrap** — Deploy Botte Secrète's token-saving stack into a target project — wire the botte-llm MCP server into .mcp.json, audit the project's agent directives, and write a .botte config + se
 - **call-chains** — Policy A5 detector (docs/local-analysis-policy.md) — finds intra-module passthrough adapter chains of depth > 5 where every link forwards arguments without transformation
 - **demo** — Live ANSI dashboard of the belt's decisions — routing, token savings, micro-NN outputs, escalations, cache hits — either a built-in scripted scenario (no LLM, no network, works on 

@@ -4,7 +4,7 @@ description: "Fail-closed evidence and planning contracts for self-hosting decis
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: subscription_saver
 ---
 # subscription-saver — evidence, not assertion

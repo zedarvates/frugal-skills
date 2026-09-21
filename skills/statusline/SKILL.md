@@ -4,7 +4,7 @@ description: "One-line summary of the belt's session activity (tokens saved, cac
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: statusline
 ---
 # statusline — the savings, always visible

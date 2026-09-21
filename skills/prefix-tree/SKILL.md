@@ -4,7 +4,7 @@ description: "Registry of each agent's stable prompt prefix in one compressed tr
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: prefix_tree
 ---
 # prefix-tree — one trie of agent prefixes, then diffs only

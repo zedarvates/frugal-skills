@@ -4,7 +4,7 @@ description: "Split one body of context into independent typed slices (code, doc
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: context_slicer
 ---
 # context-slicer — typed slices, loaded on demand

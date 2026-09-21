@@ -4,7 +4,7 @@ description: "Distillation automatique cloud → micro-NN."
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: auto_distill
 ---
 # auto distill

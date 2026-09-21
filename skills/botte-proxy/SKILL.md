@@ -4,7 +4,7 @@ description: "Transparent LLM compression proxy for botte-secrete — sit betwee
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: botte_proxy
 ---
 # Botte Proxy

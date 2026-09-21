@@ -4,7 +4,7 @@ description: "Measure a project's always-on prefix (agent directives + core rule
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: context_profiler
 ---
 # context-profiler — how much window is gone before you start?

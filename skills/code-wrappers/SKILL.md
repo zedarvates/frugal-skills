@@ -4,7 +4,7 @@ description: "Policy A3 detector (docs/local-analysis-policy.md) — finds passt
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: code_wrappers
 ---
 # code-wrappers — anomaly A3 detector

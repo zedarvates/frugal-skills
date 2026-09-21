@@ -4,7 +4,7 @@ description: "Create, validate, and render a bounded provider-neutral session br
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: session_handoff
 ---
 # session-handoff — portable continuation without hidden state

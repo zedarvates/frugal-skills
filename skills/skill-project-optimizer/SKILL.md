@@ -4,7 +4,7 @@ description: "Build a standing per-project skill profile — scan the available 
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: skill_project_optimizer
 ---
 # Skill Project Optimizer

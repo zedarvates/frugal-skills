@@ -4,7 +4,7 @@ description: "Assemble the context a delegated sub-agent needs — the shared co
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: loader
 ---
 # Pre-Prompt Loader

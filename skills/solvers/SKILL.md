@@ -4,7 +4,7 @@ description: "Deterministic combinatorial solvers in stdlib — balance work acr
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: solvers
 ---
 # solvers — assignment, bin-packing, precedence scheduling

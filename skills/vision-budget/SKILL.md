@@ -4,7 +4,7 @@ description: "Deterministic preflight for local full-frame versus ROI visual-tok
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: vision_budget
 ---
 # vision-budget — local ROI planning preflight

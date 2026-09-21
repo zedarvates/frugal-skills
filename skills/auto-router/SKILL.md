@@ -4,7 +4,7 @@ description: "Auto-decide whether a task runs on a LOCAL model or a CLOUD model 
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: auto_router
 ---
 # auto-router — effort-based local↔cloud routing + fusion

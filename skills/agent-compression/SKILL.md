@@ -4,7 +4,7 @@ description: "Compress inter-agent messages into a binary wire format — 4-bit 
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: agent_compression
 ---
 # agent-compression — inter-agent binary transport

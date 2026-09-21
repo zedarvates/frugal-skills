@@ -4,7 +4,7 @@ description: "Agents autobudgétaires — gèrent leur propre budget token."
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: self_budget
 ---
 # self budget

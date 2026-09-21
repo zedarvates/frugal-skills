@@ -4,7 +4,7 @@ description: "Pick the optimal set of skills/docs to load for a task under a tok
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: context_budget
 ---
 # context-budget — optimal context under a token budget

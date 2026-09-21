@@ -4,7 +4,7 @@ description: "Optimisations DAG/RAG — waves, pruning, memoization, routing."
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: dag_optimizer
 ---
 # dag optimizer

@@ -4,7 +4,7 @@ description: "Skip an agent run whose result can be predicted instead of executi
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: agent_cache
 ---
 # Agent Cache

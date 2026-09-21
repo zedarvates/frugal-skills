@@ -4,7 +4,7 @@ description: "Discover, audit and use local LLM servers (LM Studio, Ollama, Loca
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: llm_backends
 ---
 # llm-backends — Local LLM discovery, audit & routing

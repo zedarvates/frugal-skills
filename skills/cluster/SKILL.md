@@ -4,7 +4,7 @@ description: "Treat the homelab/micro-cluster as one schedulable resource — di
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: cluster
 ---
 # cluster — the homelab as one schedulable resource

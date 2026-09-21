@@ -4,7 +4,7 @@ description: "Deterministic repository exploration that separates context gather
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: fast_context
 ---
 # FastContext Agent — exploration repo

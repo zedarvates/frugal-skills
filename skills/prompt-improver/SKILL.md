@@ -4,7 +4,7 @@ description: "Rewrite a rough prompt into a professional, structured prompt (rol
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: prompt_improver
 ---
 # prompt-improver — pro structured prompts, built locally

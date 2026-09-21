@@ -4,7 +4,7 @@ description: "Install cross-agent MCP plugins into supported coding agents throu
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: plugins
 ---
 # plugins — one installer, several agents

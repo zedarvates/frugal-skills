@@ -4,7 +4,7 @@ description: "Five-layer anti-hallucination harness (gate, constrain, ground, ve
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: local_harness
 ---
 # local-harness — anti-hallucination execution harness

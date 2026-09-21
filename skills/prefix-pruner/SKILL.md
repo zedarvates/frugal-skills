@@ -4,7 +4,7 @@ description: "Prune context sections the agent never actually uses — a prefix 
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: prefix_pruner
 ---
 # Prefix Pruner

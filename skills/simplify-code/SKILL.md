@@ -4,7 +4,7 @@ description: "A three-reviewer parallel pass over a diff — one reviewer on cod
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: simplify-code
 ---
 # Simplify Code — parallel three-agent review

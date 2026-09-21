@@ -4,7 +4,7 @@ description: "MCP Gateway — expose toutes les skills Botte comme outils MCP. D
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: mcp_gateway
 ---
 # mcp-gateway — Botte Secrète MCP Gateway

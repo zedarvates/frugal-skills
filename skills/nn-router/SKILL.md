@@ -4,7 +4,7 @@ description: "Estimate a task's complexity and route it to the right model tier,
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: nn_router
 ---
 # nn-router — complexity to tier

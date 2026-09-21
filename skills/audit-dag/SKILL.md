@@ -4,7 +4,7 @@ description: "Build one canonical machine-first audit as a DAG of findings, then
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: audit_dag
 ---
 # audit-dag — one canonical audit, two derived views

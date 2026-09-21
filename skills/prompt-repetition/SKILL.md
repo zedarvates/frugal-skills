@@ -4,7 +4,7 @@ description: "Policy A8 detector (docs/local-analysis-policy.md) — finds repea
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: prompt_repetition
 ---
 # prompt-repetition — anomaly A8 detector

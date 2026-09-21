@@ -4,7 +4,7 @@ description: "Policy A9 detector (docs/local-analysis-policy.md) — finds redun
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: agent_overlap
 ---
 # agent-overlap — anomaly A9 detector

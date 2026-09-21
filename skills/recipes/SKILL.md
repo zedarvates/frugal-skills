@@ -4,7 +4,7 @@ description: "Observe content-free botte-llm call shapes, review repeated read-o
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: recipes
 ---
 # recipes — Verified read-only MCP workflows

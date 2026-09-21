@@ -4,7 +4,7 @@ description: "The system's self-model — a capability registry (scans every SKI
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: capabilities
 ---
 # capabilities — the system's map of itself (registry + curator)

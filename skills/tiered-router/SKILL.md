@@ -4,7 +4,7 @@ description: "Five-level model selection with cost estimation and automatic down
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: tiered_router
 ---
 # Tiered Model Router (P14)

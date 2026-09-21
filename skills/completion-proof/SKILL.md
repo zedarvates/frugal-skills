@@ -4,7 +4,7 @@ description: "Policy A11 detector (docs/local-analysis-policy.md) — finds repo
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: completion_proof
 ---
 # completion-proof — anomaly A11 detector

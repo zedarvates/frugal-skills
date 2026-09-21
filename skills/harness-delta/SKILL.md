@@ -4,7 +4,7 @@ description: "Vérification différentielle — ne vérifie que les sections mod
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: harness_delta
 ---
 # harness delta

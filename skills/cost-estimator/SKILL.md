@@ -4,7 +4,7 @@ description: "Estimate what a task or a fix will cost — tokens, model/tier, mo
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: cost_estimator
 ---
 # cost-estimator — tokens · model · money · time

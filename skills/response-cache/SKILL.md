@@ -4,7 +4,7 @@ description: "Cache model responses so a repeated or similar query does not pay 
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: response_cache
 ---
 # response-cache — hash first, semantics second, model last

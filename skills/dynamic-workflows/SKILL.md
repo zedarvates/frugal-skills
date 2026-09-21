@@ -4,7 +4,7 @@ description: "Orchestration patterns for efficient agents — classify and act, 
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: dynamic-workflows
 ---
 # Dynamic Workflows — patterns for efficient agents

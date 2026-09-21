@@ -4,7 +4,7 @@ description: "Lightweight SBOM scanner for Python/Rust/Node dependencies"
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: sbom
 ---
 # SBOM Scanner

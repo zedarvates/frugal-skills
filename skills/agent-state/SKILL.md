@@ -4,7 +4,7 @@ description: "Validate and reconcile backend-neutral agent lifecycle state, expl
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: agent_state
 ---
 # agent-state — explicit authority and capability negotiation

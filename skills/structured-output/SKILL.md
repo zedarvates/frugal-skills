@@ -4,7 +4,7 @@ description: "Compact LLM-facing JSON and optionally emit round-trip-verified TO
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: structured_output
 ---
 # structured-output — adaptive JSON/TOON presentation

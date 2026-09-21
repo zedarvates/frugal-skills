@@ -4,7 +4,7 @@ description: "Local-first tool routing primitives — tool specifications, a lex
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: tool_router
 ---
 # tool-router — choose a tool, locally

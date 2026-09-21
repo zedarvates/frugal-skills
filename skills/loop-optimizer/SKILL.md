@@ -4,7 +4,7 @@ description: "Orchestrate a retroactive loop with token economy — a controller
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: loop_optimizer
 ---
 # loop-optimizer — bounded retroactive loops

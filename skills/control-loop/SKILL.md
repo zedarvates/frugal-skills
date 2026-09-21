@@ -4,7 +4,7 @@ description: "Close the system into a self-improving loop — measure routing ou
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: control_loop
 ---
 # control-loop — the router that learns

@@ -4,7 +4,7 @@ description: "Policy A5 detector (docs/local-analysis-policy.md) — finds intra
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: call_chains
 ---
 # call-chains — anomaly A5 detector

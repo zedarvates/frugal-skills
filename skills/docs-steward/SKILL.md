@@ -4,7 +4,7 @@ description: "Scoped documentation map for multi-component projects (server + cl
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: docs_steward
 ---
 # docs-steward — the right docs, at the right scope

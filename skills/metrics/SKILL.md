@@ -4,7 +4,7 @@ description: "Cost-focused project metrics, broken down per component — LOC by
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: metrics
 ---
 # metrics — quantify a project's token/cost profile

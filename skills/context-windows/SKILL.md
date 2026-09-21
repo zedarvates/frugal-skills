@@ -4,7 +4,7 @@ description: "Persistent context windows for feedback loops — register a windo
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: context_windows
 ---
 # context-windows — load the delta, not the loop

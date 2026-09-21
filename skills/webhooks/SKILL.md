@@ -4,7 +4,7 @@ description: "Minimal HTTP endpoint that exposes the router to no-code workflows
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: webhooks
 ---
 # webhooks — expose the router to no-code workflows

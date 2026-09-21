@@ -4,7 +4,7 @@ description: "Policy A10 detector (docs/local-analysis-policy.md) — finds iden
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: repeated_attempts
 ---
 # repeated-attempts — anomaly A10 detector

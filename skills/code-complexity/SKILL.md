@@ -4,7 +4,7 @@ description: "Policy A1 detector (docs/local-analysis-policy.md) — finds over-
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: code_complexity
 ---
 # code-complexity — anomaly A1 detector

@@ -4,7 +4,7 @@ description: "List a project's correctable issues — confirmed dead code, dupli
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: fix
 ---
 # fix — correctable issues, each with its cost

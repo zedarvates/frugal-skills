@@ -4,7 +4,7 @@ description: "Show the scoped ambient-status-v1 metrics in a local, top-center W
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: ambient_hud
 ---
 # Ambient HUD

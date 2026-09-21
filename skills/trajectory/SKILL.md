@@ -4,7 +4,7 @@ description: "Trajectory Learning for Botte Secrète — stores solver trajector
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: trajectory
 ---
 # Trajectory Learning for Botte Secrète

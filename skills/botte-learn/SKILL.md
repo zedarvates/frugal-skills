@@ -4,7 +4,7 @@ description: "Analyse recorded sessions for recurring failure patterns and turn 
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: botte_learn
 ---
 # botte-learn — from repeated failures to correction rules

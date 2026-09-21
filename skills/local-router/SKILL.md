@@ -4,7 +4,7 @@ description: "Route a task to a local model when the hardware can serve it — a
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: local_router
 ---
 # local-router — prefer local over cloud

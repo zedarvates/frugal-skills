@@ -4,7 +4,7 @@ description: "Policy A6 detector (docs/local-analysis-policy.md) — finds dupli
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: code_duplication
 ---
 # code-duplication — anomaly A6 detector (exact + semantic)

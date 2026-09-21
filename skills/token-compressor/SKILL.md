@@ -4,7 +4,7 @@ description: "Compress the token structure itself, not the content — semantic 
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: token_compressor
 ---
 # token-compressor — compress the structure, not the content

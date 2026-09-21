@@ -4,7 +4,7 @@ description: "Run inference with tiny feedforward classifiers and maintain their
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: botte_nn
 ---
 # botte-nn — tiny classifier inference and calibration

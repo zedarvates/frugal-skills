@@ -4,7 +4,7 @@ description: "Adversarial red team that challenges the blue team's output — a 
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: cardinal
 ---
 # Les Mousquetaires du Cardinal — Red Team

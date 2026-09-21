@@ -4,7 +4,7 @@ description: "Policy A2 detector (docs/local-analysis-policy.md) — finds mutab
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: code_state
 ---
 # code-state — anomaly A2 detector

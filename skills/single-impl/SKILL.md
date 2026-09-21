@@ -4,7 +4,7 @@ description: "Policy A4 detector (docs/local-analysis-policy.md) — finds ABC, 
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: single_impl
 ---
 # single-impl — anomaly A4 detector

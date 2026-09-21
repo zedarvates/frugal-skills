@@ -4,7 +4,7 @@ description: "Independent strategic outsider above the blue and red teams. Use f
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: monte_cristo
 ---
 # Monte Cristo — strategic outsider

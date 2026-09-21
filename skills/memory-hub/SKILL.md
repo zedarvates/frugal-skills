@@ -4,7 +4,7 @@ description: "The governed agent memory store — searchable entries with contex
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: memory_hub
 ---
 # memory-hub — governed, revocable agent memory

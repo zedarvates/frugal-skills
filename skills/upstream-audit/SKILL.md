@@ -4,7 +4,7 @@ description: "Track the reviewed Ponytail and RTK baselines, local RTK version, 
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: upstream_audit
 ---
 # Upstream audit

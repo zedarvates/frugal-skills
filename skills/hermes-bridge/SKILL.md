@@ -4,7 +4,7 @@ description: "Expose auto_route/local_chat/fusion/find_skills/infra_tips to Herm
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: hermes_bridge
 ---
 # hermes-bridge — connect the belt to another agent framework

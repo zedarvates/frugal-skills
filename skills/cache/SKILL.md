@@ -4,7 +4,7 @@ description: "Cache a project's scan result so the first agent scans and the fol
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: cache
 ---
 # Project Cache

@@ -4,7 +4,7 @@ description: "Measure tokens, cloud calls, money, latency and local energy per v
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: efficiency
 ---
 # Efficiency ledger

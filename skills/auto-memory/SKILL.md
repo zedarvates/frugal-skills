@@ -4,7 +4,7 @@ description: "Memory as a learnable skill — store, recall, compress, and conso
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: auto_memory
 ---
 # AutoMemory

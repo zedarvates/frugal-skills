@@ -4,7 +4,7 @@ description: "Token-efficient coding standards — the three taxes to weigh befo
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: code-rules
 ---
 # Code Rules — token-efficient coding standards

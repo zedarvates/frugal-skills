@@ -4,7 +4,7 @@ description: "Compress a large log file before an agent reads it — collapse nu
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: context_compressor
 ---
 # context-compressor — log pattern reduction (consolidation pending)

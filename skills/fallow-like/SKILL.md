@@ -4,7 +4,7 @@ description: "A bundle of nine local static analyzers — dead code, duplication
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: fallow_like
 ---
 # Fallow-Like Static Analyzers

@@ -4,7 +4,7 @@ description: "Persist any audit as a timestamped Markdown and/or HTML file (name
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: report
 ---
 # report — audits saved as timestamped, consultable files

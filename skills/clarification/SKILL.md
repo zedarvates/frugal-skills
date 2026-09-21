@@ -4,7 +4,7 @@ description: "Ask up to five numbered questions before starting work, with a dec
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: clarification
 ---
 # Clarification Proactive

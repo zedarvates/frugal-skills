@@ -4,7 +4,7 @@ description: "Generate one self-contained, timestamped HTML dashboard of the sys
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: dashboard
 ---
 # Dashboard Skill

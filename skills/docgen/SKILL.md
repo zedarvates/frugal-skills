@@ -4,7 +4,7 @@ description: "Generate documentation with a local model drafting and the cloud o
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: docgen
 ---
 # docgen — local-drafted docs (cloud-refined) + session review

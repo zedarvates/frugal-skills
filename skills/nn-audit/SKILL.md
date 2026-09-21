@@ -4,7 +4,7 @@ description: "Audit the micro-NNs — is each model grounded in REAL data, or a 
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: nn_audit
 ---
 # nn-audit — grounded NNs, or synthetic copies of rules?

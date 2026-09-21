@@ -4,7 +4,7 @@ description: "Local image generation through the ComfyUI HTTP API — queue a wo
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: comfyui
 ---
 # ComfyUI Integration — local image generation

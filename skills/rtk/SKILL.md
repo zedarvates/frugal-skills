@@ -4,7 +4,7 @@ description: "Compact command output before it reaches the model — prefix a sh
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: rtk
 ---
 # RTK — compact shell output

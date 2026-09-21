@@ -4,7 +4,7 @@ description: "Append-only JSONL decision log (.botte/events.jsonl) that every fi
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: events
 ---
 # events — the unified decision log

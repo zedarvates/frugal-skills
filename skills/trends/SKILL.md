@@ -4,7 +4,7 @@ description: "Track a project's audit metrics over time (directive score, duplic
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: trends
 ---
 # trends — the project's metrics over time

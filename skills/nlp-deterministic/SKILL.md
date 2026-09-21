@@ -4,7 +4,7 @@ description: "Classify and extract from text WITHOUT an LLM — intent classific
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: nlp_deterministic
 ---
 # nlp-deterministic — classify & extract without a model
@@ -17,7 +17,7 @@ repeatable computation.
 
 ```bash
 python -m skills.nlp_deterministic.cli classify "speed up my SQL" perf=fast,optimize,slow auth=login,token
-python -m skills.nlp_deterministic.cli entities "GET https://x.io from 10.0.0.1 with $TOKEN --json"
+python -m skills.nlp_deterministic.cli entities "GET https://x.io from 203.0.113.1 with $TOKEN --json"
 python -m skills.nlp_deterministic.cli keywords "cache the cache so queries stay fast"
 ```
 

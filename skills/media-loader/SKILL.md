@@ -4,7 +4,7 @@ description: "Extract text from media before any model sees it — video keyfram
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: media_loader
 ---
 # media-loader — never send raw media to a model

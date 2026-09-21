@@ -4,7 +4,7 @@ description: "A compounding knowledge layer for sessions — a goal layer, a ret
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: hermes-second-brain
 ---
 # Hermes Second Brain

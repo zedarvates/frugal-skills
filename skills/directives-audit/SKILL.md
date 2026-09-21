@@ -4,7 +4,7 @@ description: "Audit a project's AI-agent guidance files — CLAUDE.md, AGENTS.md
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: directives_audit
 ---
 # directives-audit — validate AI-agent guidance files

@@ -4,7 +4,7 @@ description: "Local-first GUI/app testing by image matching (SikuliX) — turn a
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: app_test
 ---
 # app-test — test apps locally by clicking their buttons

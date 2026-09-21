@@ -4,7 +4,7 @@ description: "Scan Python skills and MCP servers for malicious code — dangerou
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: security_scanner
 ---
 # security-scanner — code security scanner

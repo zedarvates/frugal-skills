@@ -4,7 +4,7 @@ description: "Build a bounded, read-only manifest of explicitly selected local r
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: harvest
 ---
 # Harvest

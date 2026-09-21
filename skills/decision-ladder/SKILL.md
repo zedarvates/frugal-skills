@@ -4,7 +4,7 @@ description: "Ponytail-inspired YAGNI enforcement — explicit need, existing co
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: decision_ladder
 ---
 # Decision Ladder

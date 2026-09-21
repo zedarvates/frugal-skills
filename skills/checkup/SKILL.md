@@ -4,7 +4,7 @@ description: "Run the canonical, already-optimal project checkup in one command 
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: checkup
 ---
 # checkup — the canonical project checkup ("botte doctor")

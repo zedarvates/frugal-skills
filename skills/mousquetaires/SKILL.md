@@ -4,7 +4,7 @@ description: "The blue team pipeline — audit, fix, optimize, consolidate — w
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: mousquetaires
 ---
 # Les Quatre Mousquetaires — Blue Team

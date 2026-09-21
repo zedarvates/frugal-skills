@@ -4,7 +4,7 @@ description: "Integration, monitoring and meta-optimisation across the module se
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: pipeline_integrator
 ---
 # pipeline-integrator — is the assembled pipeline coherent?

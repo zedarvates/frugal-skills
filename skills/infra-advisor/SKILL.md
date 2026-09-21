@@ -4,7 +4,7 @@ description: "Audit the local cluster's hardware/software/MCP setup and recommen
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: infra_advisor
 ---
 # infra-advisor — cut token cost beyond the code

@@ -4,7 +4,7 @@ description: "Local-first web scraping and source ingestion — fetch a URL, ext
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: ingest
 ---
 # ingest — scrape the web & build a knowledge foundation, locally

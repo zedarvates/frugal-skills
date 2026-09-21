@@ -4,7 +4,7 @@ description: "Decide the per-turn shaping policy for a query and an agent profil
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: token_shaper
 ---
 # token-shaper — per-turn shaping policy

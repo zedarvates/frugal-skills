@@ -4,7 +4,7 @@ description: "Route a high-level goal to an ordered, local-first plan of capabil
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: conductor
 ---
 # conductor — goal → ordered plan of capabilities

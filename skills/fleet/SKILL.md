@@ -4,7 +4,7 @@ description: "Aggregate status across the fleet, sortable by project tokens save
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: fleet
 ---
 # fleet — portfolio roll-up, read-only

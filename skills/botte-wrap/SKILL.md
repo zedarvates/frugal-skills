@@ -4,7 +4,7 @@ description: "Wrap an installed coding agent so its traffic goes through the loc
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: botte_wrap
 ---
 # botte-wrap — route an agent through the compression proxy

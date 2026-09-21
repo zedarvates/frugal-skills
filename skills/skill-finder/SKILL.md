@@ -4,7 +4,7 @@ description: "Find which skills, tools or MCP are relevant to a task by searchin
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: skill_finder
 ---
 # skill-finder — local, zero-token skill & tool search

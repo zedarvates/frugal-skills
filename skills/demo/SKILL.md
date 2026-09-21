@@ -4,7 +4,7 @@ description: "Live ANSI dashboard of the belt's decisions — routing, token sav
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: demo
 ---
 # demo — watch the belt decide, live

@@ -4,7 +4,7 @@ description: "Compact JSON report wire format for agent-facing reports — three
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: ultra_compact
 ---
 # Ultra-Compact JSON (P12)

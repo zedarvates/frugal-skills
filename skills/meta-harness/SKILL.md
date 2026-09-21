@@ -4,7 +4,7 @@ description: "Run several skills as one governed pipeline in which every stage e
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: meta_harness
 ---
 # meta-harness — governed multi-stage orchestration

@@ -4,7 +4,7 @@ description: "MCP server that lets Claude Code (or any MCP client) discover and 
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: llm_mcp
 ---
 # llm-mcp — Local LLM tools over Model Context Protocol

@@ -4,7 +4,7 @@ description: "Make the token-saving optimizations automatic instead of opt-in â€
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: preflight
 ---
 # preflight â€” enforce prefer-local, automatically

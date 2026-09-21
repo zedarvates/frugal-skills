@@ -4,7 +4,7 @@ description: "Static analysis for JS/TS codebases through the external Fallow CL
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: fallow
 ---
 # Fallow — JS/TS codebase intelligence

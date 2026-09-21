@@ -4,7 +4,7 @@ description: "An inter-agent protocol where agents exchange quantized embedding 
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: vector_protocol
 ---
 # Vector Agent Protocol (P11)

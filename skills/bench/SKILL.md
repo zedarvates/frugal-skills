@@ -4,7 +4,7 @@ description: "Reproducible token/cost benchmark — runs a fixed task corpus thr
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: bench
 ---
 # bench — the proof behind the savings claim

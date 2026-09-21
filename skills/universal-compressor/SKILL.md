@@ -4,7 +4,7 @@ description: "Compress content by type — text, JSON, logs, tool output and cod
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: universal_compressor
 ---
 # Universal Compressor

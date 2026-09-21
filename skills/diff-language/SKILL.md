@@ -4,7 +4,7 @@ description: "A compact, agent-native notation for describing code changes and f
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: diff_language
 ---
 # Diff Language

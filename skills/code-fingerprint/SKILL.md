@@ -4,7 +4,7 @@ description: "Hash every function, method, class and module (SHA-256 over normal
 license: MIT
 metadata:
   version: "1.0.0"
-  domain: botte-secrete
+  domain: agent-skills
   canonical-name: code_fingerprint
 ---
 # Code Fingerprinting (P13)
