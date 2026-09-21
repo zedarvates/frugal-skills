@@ -9,7 +9,7 @@ metadata:
 ---
 # Dashboard Skill
 
-Live metrics visualization for botte-secrete — one data source, three views
+Live metrics visualization for this toolkit — one data source, three views
 (timestamped HTML report, ANSI TUI, live HTTP API).
 
 ## Usage

@@ -1,6 +1,6 @@
 ---
 name: botte-proxy
-description: "Transparent LLM compression proxy for botte-secrete — sit between any AI agent and its LLM API to compress requests by 40-95%. Use when you want token savings without changing agent code."
+description: "Transparent LLM compression proxy for this toolkit — sit between any AI agent and its LLM API to compress requests by 40-95%. Use when you want token savings without changing agent code."
 license: MIT
 metadata:
   version: "1.0.0"

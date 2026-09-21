@@ -36,7 +36,7 @@ Add to `.mcp.json` at the project root (an example ships at
     "botte-llm": {
       "command": "python",
       "args": ["-m", "skills.llm_mcp.server"],
-      "cwd": "/absolute/path/to/botte-secrete"
+      "cwd": "/path/to/project"
     }
   }
 }

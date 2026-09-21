@@ -1,6 +1,6 @@
 ---
 name: harvest
-description: "Build a bounded, read-only manifest of explicitly selected local repositories and dispersed Botte deployments before comparing or migrating fixes."
+description: "Build a bounded, read-only manifest of explicitly selected local repositories and dispersed deployments before comparing or migrating fixes."
 license: MIT
 metadata:
   version: "1.0.0"

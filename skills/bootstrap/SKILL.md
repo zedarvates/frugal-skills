@@ -1,6 +1,6 @@
 ---
 name: bootstrap
-description: "Deploy Botte Secrète's token-saving stack into a target project — wire the botte-llm MCP server into .mcp.json, audit the project's agent directives, and write a .botte config + setup report. Use when the user wants to 'install botte', 'set up token savings on a project', reduce an existing project's token/cost usage, or onboard a repo to local-first routing. This is the capstone that makes the toolkit actually save money on real projects."
+description: "Deploy the token-saving stack into a target project — wire the botte-llm MCP server into .mcp.json, audit the project's agent directives, and write a .botte config + setup report. Use when the user wants to 'install botte', 'set up token savings on a project', reduce an existing project's token/cost usage, or onboard a repo to local-first routing. This is the capstone that makes the toolkit actually save money on real projects."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -9,7 +9,7 @@ metadata:
 ---
 # bootstrap — deploy the toolkit into a project
 
-The whole point of Botte Secrète is to make *real projects* cheaper to work on.
+The whole point of the toolkit is to make *real projects* cheaper to work on.
 This installs the stack into any project in one command.
 
 ## Run it

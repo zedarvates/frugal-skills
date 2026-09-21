@@ -9,7 +9,7 @@ metadata:
 ---
 # Universal Compressor
 
-Headroom-inspired multi-type compression for botte-secrete. Reduces token usage by 40-90% depending on content type. Works as library, CLI, or MCP server.
+Headroom-inspired multi-type compression for this toolkit. Reduces token usage by 40-90% depending on content type. Works as library, CLI, or MCP server.
 
 ## Strategies
 

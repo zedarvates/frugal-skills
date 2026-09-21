@@ -104,9 +104,9 @@ identifier here, and state whether the use is compatible.
   Identify the exact project.
 - **shadcn/improve** — cited for the "recon" step in directives_audit. Identify
   the exact repository.
-- **Omnigent** — cited as the inspiration for meta_harness, described as
-  100 percent Botte-native in its implementation. Identify the exact project and
-  confirm that no code was copied.
+- **Omnigent** — cited as the inspiration for meta_harness, whose implementation
+  is described as entirely its own. Identify the exact project and confirm that
+  no code was copied.
 - **Stanford AutoMem** — cited as the inspiration for memory-as-capability.
   Identify whether this is a paper or a repository, and its terms.
 

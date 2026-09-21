@@ -1,6 +1,6 @@
 ---
 name: capabilities
-description: "The system's self-model — a capability registry (scans every SKILL.md into a layered tree SENSE→DECIDE→ACT→REMEMBER→GOVERN→DEPLOY) plus a 'curator' that picks the right capabilities for a goal locally. Use to see the whole toolkit as a system/arborescence, to let an agent discover what botte-secrète can do, or as the data the Conductor reads to compose a plan."
+description: "The system's self-model — a capability registry (scans every SKILL.md into a layered tree SENSE→DECIDE→ACT→REMEMBER→GOVERN→DEPLOY) plus a 'curator' that picks the right capabilities for a goal locally. Use to see the whole toolkit as a system/arborescence, to let an agent discover what the toolkit can do, or as the data the Conductor reads to compose a plan."
 license: MIT
 metadata:
   version: "1.0.0"

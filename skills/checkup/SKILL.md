@@ -68,7 +68,7 @@ so a bot can edit it in place), **including the security section** — so the
 taint/data-flow scan rides into CI for free. The `🧦 Botte Checkup (PR)` GitHub
 Action (`.github/workflows/botte-pr-checkup.yml`) runs this on every PR and
 posts/updates a single comment via `gh` — 0 cloud tokens, no extra dependencies.
-Any project that deployed botte-secrète can reuse the same workflow.
+Any project that deployed the toolkit can reuse the same workflow.
 
 Related: [[preflight]] (enforces prefer-local every turn), [[infra-advisor]],
 [[metrics]], [[trends]], [[directives-audit]], [[bootstrap]].

@@ -1,15 +1,15 @@
 ---
 name: mcp-gateway
-description: "MCP Gateway — expose toutes les skills Botte comme outils MCP. Découverte automatique, schémas d'entrée, transport stdio. Compatible Claude Code, Codex, Cursor, et tout client MCP."
+description: "MCP Gateway — expose all the toolkit skills comme outils MCP. Découverte automatique, schémas d'entrée, transport stdio. Compatible Claude Code, Codex, Cursor, et tout client MCP."
 license: MIT
 metadata:
   version: "1.0.0"
   domain: agent-skills
   canonical-name: mcp_gateway
 ---
-# mcp-gateway — Botte Secrète MCP Gateway
+# mcp-gateway — MCP Gateway
 
-Expose l'ensemble des skills Botte Secrète comme outils MCP (Model Context Protocol).
+Expose l'ensemble des skills the toolkit comme outils MCP (Model Context Protocol).
 Un seul point d'entrée pour que n'importe quel agent (Claude Code, Codex, Cursor, etc.)
 découvre et utilise toutes les capacités de Botte.
 

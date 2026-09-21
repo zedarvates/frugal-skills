@@ -45,6 +45,6 @@ the schema without adding it to the always-on tool prefix.
 - Safety: an active brief needs a next step; a blocked brief needs a blocker.
 
 The implementation is conceptually informed by Traycer's durable agent metadata
-and no-transcript separation, but was written from scratch for Botte Secrète's
+and no-transcript separation, but was written from scratch for this toolkit's
 local-first, dependency-free architecture. See
 `docs/plans/2026-08-06_traycer-inspired-session-handoff.md` for provenance.

@@ -20,7 +20,7 @@ cloud models — then bundles a fast one-pass audit of the project.
 python -m skills.infra_advisor.cli tips
 python -m skills.infra_advisor.cli tips --subnet --json
 
-# One-pass audit on the project where Botte Secrète is installed
+# One-pass audit on the project where the toolkit is installed
 python -m skills.infra_advisor.cli auto .
 python -m skills.infra_advisor.cli auto /path/to/project --json
 ```

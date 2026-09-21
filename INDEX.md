@@ -83,7 +83,7 @@
 - **monte-cristo** — Independent strategic outsider above the blue and red teams
 - **mousquetaires** — The blue team pipeline — audit, fix, optimize, consolidate — with an auditor agent, a developer agent, an optimizer agent and an orchestrator, exposed as a CLI over a project
 - **pipeline-integrator** — Integration, monitoring and meta-optimisation across the module set — health check, module heal, agent sync, budget optimisation, module registration and an integration report (hea
-- **trajectory** — Trajectory Learning for Botte Secrète — stores solver trajectories and searches similar past optimizations to inform future decisions
+- **trajectory** — Trajectory learning — stores solver trajectories and searches similar past optimizations to inform future decisions
 - **vector-protocol** — An inter-agent protocol where agents exchange quantized embedding vectors rather than text — each agent operates on low-dimensional vectors pushed to the local vector store and onl
 
 ## Local and edge inference
@@ -93,7 +93,7 @@
 - **hailo-vision** — Edge vision inference on the Hailo-8 accelerator — object detection, image classification and OCR through compiled .hef models, with the available model table, the Python API (dete
 - **llm-backends** — Discover, audit and use local LLM servers (LM Studio, Ollama, LocalAI, vLLM, llama.cpp) on this machine or the network to offload work from the cloud and save tokens
 - **llm-mcp** — MCP server that lets Claude Code (or any MCP client) discover and call local LLM servers (LM Studio, Ollama, …) as tools, to offload cheap tasks off the cloud
-- **mcp-gateway** — MCP Gateway — expose toutes les skills Botte comme outils MCP
+- **mcp-gateway** — MCP Gateway — expose all the toolkit skills comme outils MCP
 - **media-loader** — Extract text from media before any model sees it — video keyframes through the local vision accelerator, audio through local speech to text, image detection/classification/OCR, and
 
 ## Prompt and output
@@ -115,7 +115,7 @@
 - **efficiency** — Measure tokens, cloud calls, money, latency and local energy per verified task without storing task content.
 - **events** — Append-only JSONL decision log (.botte/events.jsonl) that every filter in the belt writes to — routing, cache hits, escalations, micro-NN outputs
 - **fleet** — Aggregate status across the fleet, sortable by project tokens saved, lines of code or number of fixes — a read-only view over the canonical fleet registry that the dashboard writes
-- **harvest** — Build a bounded, read-only manifest of explicitly selected local repositories and dispersed Botte deployments before comparing or migrating fixes.
+- **harvest** — Build a bounded, read-only manifest of explicitly selected local repositories and dispersed deployments before comparing or migrating fixes.
 - **infra-advisor** — Audit the local cluster's hardware/software/MCP setup and recommend changes that cut token cost — GPU upgrades, Hailo NPU for vision, moving the inference node to Linux, running Qd
 - **metrics** — Cost-focused project metrics, broken down per component — LOC by language and component, duplicate-function groups, directive health, always-on context cost (CLAUDE.md tokens × tur
 - **plugins** — Install cross-agent MCP plugins into supported coding agents through one installer with a declared list of supported tools, so several agents get the same server without per-agent 
@@ -135,7 +135,7 @@
 
 ## Utilities
 
-- **bootstrap** — Deploy Botte Secrète's token-saving stack into a target project — wire the botte-llm MCP server into .mcp.json, audit the project's agent directives, and write a .botte config + se
+- **bootstrap** — Deploy the token-saving stack into a target project — wire the botte-llm MCP server into .mcp.json, audit the project's agent directives, and write a .botte config + setup report
 - **call-chains** — Policy A5 detector (docs/local-analysis-policy.md) — finds intra-module passthrough adapter chains of depth > 5 where every link forwards arguments without transformation
 - **demo** — Live ANSI dashboard of the belt's decisions — routing, token savings, micro-NN outputs, escalations, cache hits — either a built-in scripted scenario (no LLM, no network, works on 
 - **fix** — List a project's correctable issues — confirmed dead code, duplication, stale directive references — each with a tokens·model·money·time cost estimate and a total

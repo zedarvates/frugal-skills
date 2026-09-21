@@ -1,13 +1,13 @@
 ---
 name: trajectory
-description: "Trajectory Learning for Botte Secrète — stores solver trajectories and searches similar past optimizations to inform future decisions"
+description: "Trajectory learning — stores solver trajectories and searches similar past optimizations to inform future decisions"
 license: MIT
 metadata:
   version: "1.0.0"
   domain: agent-skills
   canonical-name: trajectory
 ---
-# Trajectory Learning for Botte Secrète
+# Trajectory learning
 
 ## Overview
 

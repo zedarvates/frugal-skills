@@ -1,6 +1,6 @@
 ---
 name: hermes-bridge
-description: "Expose auto_route/local_chat/fusion/find_skills/infra_tips to Hermes-Agent (or any framework that expects OpenAI-function-calling tool specs instead of MCP) — plus a one-call MCP config generator for the zero-code path if the framework already speaks MCP. Use when connecting botte-secrète's routing belt to another agent framework."
+description: "Expose auto_route/local_chat/fusion/find_skills/infra_tips to Hermes-Agent (or any framework that expects OpenAI-function-calling tool specs instead of MCP) — plus a one-call MCP config generator for the zero-code path if the framework already speaks MCP. Use when connecting the toolkit's routing belt to another agent framework."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -9,12 +9,12 @@ metadata:
 ---
 # hermes-bridge — connect the belt to another agent framework
 
-botte-secrète already runs a standard MCP server (`skills.llm_mcp.server`,
+the toolkit already runs a standard MCP server (`skills.llm_mcp.server`,
 stdio JSON-RPC). If the target framework speaks MCP, **that's the whole
 integration** — no code in this module runs:
 
 ```bash
-python -m skills.hermes_bridge.cli config --cwd /path/to/botte-secrete
+python -m skills.hermes_bridge.cli config --cwd /path/to/project
 # → paste the printed {"mcpServers": {...}} block into the framework's MCP config
 ```
 

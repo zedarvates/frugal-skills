@@ -9,7 +9,7 @@ metadata:
 ---
 # Decision Ladder
 
-Ponytail-inspired YAGNI enforcement for botte-secrete. Before writing ANY code, climb this ladder. Each rung that passes saves the cost of every rung above it.
+Ponytail-inspired YAGNI enforcement for this toolkit. Before writing ANY code, climb this ladder. Each rung that passes saves the cost of every rung above it.
 
 ## The Ladder
 
