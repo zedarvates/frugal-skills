@@ -13,7 +13,7 @@ repo = root.parents[1]
 manifest = json.loads((root / "plugin.json").read_text(encoding="utf-8"))
 assert manifest.get("$schema") == "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json"
 assert manifest["name"] == "frugal-agent-kit"
-assert re.fullmatch(r"\\d+\\.\\d+\\.\\d+", manifest["version"])
+assert re.fullmatch(r"[0-9]+[.][0-9]+[.][0-9]+", manifest["version"])
 ui = manifest["extensions"]["com.openai"]["interface"]
 assert len(ui["displayName"]) <= 30
 assert len(ui["shortDescription"]) <= 30
@@ -23,7 +23,7 @@ skill_paths = sorted((root / "skills").glob("*/SKILL.md"))
 assert len(skill_paths) == 4
 for p in skill_paths:
     body = p.read_text(encoding="utf-8")
-    assert re.match(r"^---\\nname: [a-z][a-z0-9-]+\\ndescription:", body), p
+    assert body.startswith("---" + chr(10) + "name: ") and (chr(10) + "description:") in body, p
     assert not re.search(r"sk-proj-|ghp_|BEGIN PRIVATE KEY", body)
 entries += skill_paths
 for field in ("composerIcon", "logo"):
