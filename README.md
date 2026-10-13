@@ -69,14 +69,17 @@ As a Codex plugin (the whole catalog):
     codex plugin marketplace add zedarvates/frugal-skills --ref main
     codex plugin add frugal-skills@frugal-skills-marketplace
 
-Refresh the marketplace and installed package:
+For an upstream release whose manifests declare a new plugin version, refresh
+the marketplace and install that version:
 
     codex plugin marketplace upgrade frugal-skills-marketplace
     codex plugin add frugal-skills@frugal-skills-marketplace
 
 Start a new Codex session after installation or update. See
 [Codex installation, release packaging and limitations](docs/CODEX.md) for local
-testing, version pinning and public directory submission. This Git marketplace
+testing, cachebusters, version pinning and public directory submission. Keep the
+two manifest versions aligned and use a new version for changed published content.
+This Git marketplace
 does not imply publication in the universal ChatGPT/Codex plugin directory.
 
 Through the Agent Skills CLI, which understands the standard layout:

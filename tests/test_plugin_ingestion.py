@@ -19,7 +19,7 @@ class PluginIngestionTests(unittest.TestCase):
         self.addCleanup(self.task_tmp.cleanup)
         self.root = Path(self.task_tmp.name) / "package"
         shutil.copytree(ROOT, self.root, ignore=shutil.ignore_patterns(
-            ".git", "dist", "__pycache__", "changes.json", "ingestion-fix.json"))
+            ".git", "dist", "__pycache__", "changes.json", "ingestion-fix.json", "review-fix.json"))
         self.manifest_path = self.root / ".codex-plugin/plugin.json"
         self.manifest = json.loads(self.manifest_path.read_text())
 
@@ -55,6 +55,20 @@ class PluginIngestionTests(unittest.TestCase):
         self.manifest["interface"]["defaultPrompt"] = "Choose a context-budget workflow."
         result = self.run_package()
         self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_aligned_local_cachebuster_is_supported(self):
+        version = "1.0.0+codex.local-20261013-184516"
+        self.manifest["version"] = version
+        path = self.root / "plugin.json"
+        portable = json.loads(path.read_text())
+        portable["version"] = version
+        path.write_text(json.dumps(portable), encoding="utf-8")
+        result = self.run_package()
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_unaligned_cachebuster_is_rejected(self):
+        self.manifest["version"] = "1.0.0+codex.local-20261013-184516"
+        self.assert_rejected("Manifest mismatch: version")
 
     def test_final_prompt_length_is_enforced(self):
         self.manifest["interface"]["defaultPrompt"] = ["x" * 129]

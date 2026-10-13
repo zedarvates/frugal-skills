@@ -121,8 +121,10 @@ def package_files():
             "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
             "Unexpected portable schema")
     require(codex.get("name") == "frugal-skills", "Unexpected plugin name")
-    require(re.fullmatch(r"\d+\.\d+\.\d+", codex.get("version", "")),
-            "Use a stable semantic plugin version")
+    require(re.fullmatch(r"(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)"
+                         r"(?:\+codex\.[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?",
+                         codex.get("version", "")),
+            "Use a stable semantic plugin version or an aligned +codex.<cachebuster> local suffix")
     require(codex.get("skills") == "./skills/", "Unexpected skill path")
     validate_interface(codex.get("interface"))
     assets = branding_files(codex["interface"])
@@ -185,9 +187,18 @@ def digest(path):
 def smoke_codex(files, version):
     require(shutil.which("codex"), "Codex CLI is required for --smoke-codex")
     with tempfile.TemporaryDirectory(prefix="frugal-codex-home-") as task_home:
+        source_root = Path(task_home) / "source"
+        # Install from an isolated package copy so update tests can edit skills
+        # and manifest versions without mutating the user's checkout.
+        for path in files + [ROOT / ".agents/plugins/marketplace.json"]:
+            copied = source_root / path.relative_to(ROOT)
+            copied.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(path, copied)
         # CODEX_HOME is the documented configuration root; use a temporary root
         # so the smoke check cannot change the user's installed plugins.
-        task_env = dict(os.environ, CODEX_HOME=task_home)
+        configuration_root = Path(task_home) / "codex"
+        configuration_root.mkdir()
+        task_env = dict(os.environ, CODEX_HOME=str(configuration_root))
 
         def run(*args):
             result = subprocess.run(
@@ -198,7 +209,7 @@ def smoke_codex(files, version):
                     f"Codex command failed: {' '.join(args)}\n{result.stderr}")
             return json.loads(result.stdout)
 
-        run("plugin", "marketplace", "add", str(ROOT))
+        run("plugin", "marketplace", "add", str(source_root))
         catalog = run("plugin", "list", "--marketplace",
                       "frugal-skills-marketplace", "--available")
         require(any(item.get("name") == "frugal-skills" and item.get("version") == version
@@ -215,7 +226,39 @@ def smoke_codex(files, version):
                     f"Installed package differs from source: {cached}")
         require(len(list((installed_root / "skills").glob("*/SKILL.md"))) == SKILL_COUNT,
                 "Installed skill inventory differs from source")
-    print(f"Codex discovery, install, reinstall and {SKILL_COUNT}-skill integrity: OK")
+
+        relative_skill = Path("skills/agent-cache/SKILL.md")
+        changed_skill = source_root / relative_skill
+        changed_skill.write_text(changed_skill.read_text(encoding="utf-8")
+                                 + "\nSmoke update marker: changed instructions.\n", encoding="utf-8")
+        same_version = run("plugin", "add", "frugal-skills@frugal-skills-marketplace")
+        same_cache = Path(same_version["installedPath"])
+        if digest(same_cache / relative_skill) != digest(changed_skill):
+            print("Codex same-version reinstall retained the old cached skill")
+        else:
+            print("Codex same-version reinstall copied the changed skill; version change still verified below")
+
+        major, minor, patch = version.split("+", 1)[0].split(".")
+        updated_version = f"{major}.{minor}.{int(patch) + 1}"
+        for name in ("plugin.json", ".codex-plugin/plugin.json"):
+            path = source_root / name
+            manifest = read_json(path)
+            manifest["version"] = updated_version
+            path.write_text(json.dumps(manifest), encoding="utf-8")
+        updated = run("plugin", "add", "frugal-skills@frugal-skills-marketplace")
+        updated_root = Path(updated["installedPath"]).resolve()
+        require(updated.get("version") == updated_version and updated_root != installed_root
+                and updated_root.is_relative_to(Path(task_home).resolve()),
+                "Codex did not install the new version in a separate isolated cache")
+        for path in files:
+            relative = path.relative_to(ROOT)
+            cached = updated_root / relative
+            require(cached.is_file() and digest(cached) == digest(source_root / relative),
+                    f"Updated package differs from the edited source: {cached}")
+        listed = run("plugin", "list", "--marketplace", "frugal-skills-marketplace")
+        require(any(item.get("version") == updated_version for item in listed.get("installed", [])),
+                "Codex did not report the updated installed version")
+    print(f"Codex discovery, install, edited-skill update and {SKILL_COUNT}-skill integrity: OK")
 
 
 def build_zip(files, version):

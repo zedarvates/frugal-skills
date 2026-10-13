@@ -23,14 +23,26 @@ of `main`. A version in the manifest is not a Git tag. Version 1.0.0 is the firs
 plugin package; use the commit containing these manifests until a release tag
 exists.
 
-For an unpinned source, refresh and reinstall:
+For an upstream release from an unpinned Git source, first confirm that the
+updated `plugin.json` and `.codex-plugin/plugin.json` declare the same **new**
+semantic version. Maintainers must change that version when publishing changed
+plugin content. Then refresh the marketplace snapshot and install the new version:
 
 ```sh
 codex plugin marketplace upgrade frugal-skills-marketplace
 codex plugin add frugal-skills@frugal-skills-marketplace
 ```
 
-Open a new Codex session after refreshing. A pinned Git ref stays pinned until
+`marketplace upgrade` refreshes the Git source; it does not by itself replace
+the installed plugin's versioned cache. Published content changes need a new
+manifest version; the local cachebuster flow below gives development iterations
+a distinct version identifier for clients loading the plugin cache. The direct
+local `plugin add` command in CLI 0.159.2 recopied an edited skill at the same
+version in our smoke test; this test does not demonstrate a stale-cache CLI bug.
+Confirm the installed version with `codex plugin list --marketplace
+frugal-skills-marketplace --json`, then open a new Codex session.
+
+A pinned Git ref stays pinned until
 the marketplace source is changed. To change that source, remove its registration
 with `codex plugin marketplace remove frugal-skills-marketplace`, then add the
 desired Git ref and install again. To uninstall the plugin:
@@ -41,6 +53,30 @@ codex plugin remove frugal-skills@frugal-skills-marketplace
 
 Choose either whole-catalog plugin installation or individual skills with
 `npx skills add`; installing both may give the host duplicate instruction entries.
+
+### Updating an edited local checkout
+
+Confirm that the configured marketplace points to the checkout you are editing.
+For a new distributable release, set a new semantic version in **both** manifests
+before reinstalling. For routine local iteration, preserve the base version and
+replace its existing build suffix with one unique `+codex.<cachebuster>` suffix
+in both manifests, for example `1.0.0+codex.local-20261013-184516`. The UTC timestamp
+must change for the next edit; do not append multiple cachebuster suffixes or
+increment the numeric release just to refresh a development cache.
+
+The official plugin-creator skill provides `scripts/update_plugin_cachebuster.py`
+for its own plugin layout. This repository has a portable manifest and a Codex
+compatibility manifest, so keep their versions aligned when changing either.
+After validating the edited package, reinstall from the existing local marketplace:
+
+```sh
+python3 scripts/package_plugin.py --check
+codex plugin add frugal-skills@frugal-skills-marketplace
+codex plugin list --marketplace frugal-skills-marketplace --json
+```
+
+Open a new Codex thread to load the changed instructions. `marketplace upgrade`
+is for Git-backed sources; it does not update a configured local checkout.
 
 ## Test a checkout
 
@@ -53,9 +89,13 @@ codex plugin add frugal-skills@frugal-skills-marketplace
 ```
 
 The smoke check uses a temporary Codex configuration and cache. It registers the
-local marketplace, discovers version 1.0.0, installs and reinstalls the plugin, and
-compares all packaged files with the installed files. It does not change your
-existing Codex installation. It was verified with Codex CLI 0.159.2.
+local marketplace from a temporary copy, discovers and installs the package, and
+compares all packaged files with the installed files. It then edits one copied
+skill, aligns both copied manifests to a new patch version, reinstalls, and checks
+that the versioned cache contains the changed instructions and all package files.
+It also reports whether reinstalling the initial version retained the old skill.
+The real checkout, release version and your existing Codex installation are not
+changed. This update test was verified with Codex CLI 0.159.2.
 
 The marketplace uses `source.path: "./"`: Codex resolves it relative to the
 marketplace root (the repository), not the `.agents/plugins/` folder. Both the
@@ -110,3 +150,4 @@ Format and distribution references, verified 2026-10-13:
 - [Package your plugin](https://developers.openai.com/plugins/build/plugins)
 - [Upload and submit your plugin](https://developers.openai.com/plugins/deploy/submission)
 - [Plugin submission errors](https://developers.openai.com/plugins/deploy/submission-errors)
+- [Codex local update and cachebuster reference](https://github.com/openai/codex/blob/main/codex-rs/skills/src/assets/samples/plugin-creator/references/installing-and-updating.md)
