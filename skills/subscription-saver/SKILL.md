@@ -1,6 +1,6 @@
 ---
 name: subscription-saver
-description: "Fail-closed evidence and planning contracts for self-hosting decisions — a validated catalogue with digest, capability coverage evaluation, inventory import and export, upstream source auditing, recommendation carrying its own evidence, deployment profiles and states, install plans and TCO scenarios. Use when a self-hosting or subscription decision must be justified by evidence rather than asserted. A recommendation fails closed when coverage or provenance is missing. Not for auditing code structure — use the code_* detectors; not for the token cost of a project — use context-profiler or cost-estimator."
+description: "Instructions for the upstream workflow: Fail-closed evidence and planning contracts for self-hosting decisions — a validated catalogue with digest, capability coverage evaluation, inventory import and export, upstream source auditing, recommendation carrying its own evidence, deployment profiles and states, install plans and TCO scenarios. Use when a self-hosting or subscription decision must be justified by evidence rather than asserted. A recommendation fails closed when coverage or provenance is missing. Not for auditing code structure — use the code_* detectors; not for the token cost of a project — use context-profiler or cost-estimator."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: subscription_saver
 ---
 # subscription-saver — evidence, not assertion
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 ## Purpose
 

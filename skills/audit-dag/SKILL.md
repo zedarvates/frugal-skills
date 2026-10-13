@@ -1,6 +1,6 @@
 ---
 name: audit-dag
-description: "Build one canonical machine-first audit as a DAG of findings, then derive two views from it: an ultra-compact form for LLMs where every node stays addressable and nothing is dropped, and an HTML report for humans (build_dag, to_compact, to_html). The DAG is the single source and the views are derived, so the agent-facing and human-facing reports can never disagree. Use when an audit must stay complete for an agent while remaining readable by a person. Not for the detectors themselves — use code-complexity, code-duplication, code-state and code-wrappers; not for the compact JSON format in isolation — use ultra-compact."
+description: "Guidance for the upstream audit DAG and its derived machine-facing and HTML views. Use to plan one canonical findings representation with addressable nodes; verify that derived views preserve it. Not for generating detector findings or choosing a compact JSON format alone (ultra-compact)."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -9,12 +9,17 @@ metadata:
 ---
 # audit-dag — one canonical audit, two derived views
 
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
+
 ## Purpose
 
-A single DAG of findings with addressable nodes, rendered twice: ultra-compact
-for the model (nothing forgotten, every node reachable) and HTML for review.
-Building the DAG once removes the drift between an agent summary and a human
-report generated separately.
+A single DAG of findings with addressable nodes, with proposed compact
+machine-facing and HTML review views.
+Deriving both views from the same DAG is intended to reduce drift. Verify that the installed renderers preserve every required finding and field.
 
     from skills.audit_dag import build_dag, to_compact, to_html
 

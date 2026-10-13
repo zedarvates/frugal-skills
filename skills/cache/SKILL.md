@@ -1,6 +1,6 @@
 ---
 name: cache
-description: "Cache a project's scan result so the first agent scans and the following agents read the cache instead — get_or_scan, a separate audit report slot, a .botte-cache store and a 24 hour TTL. Use when several agents work on the same project in sequence and the scan is the repeated cost. Not for caching a model response by question — use response-cache; not for caching an agent run whose output is predictable from its input — use agent-cache; not for skipping unchanged files during an audit — use code-fingerprint."
+description: "Instructions for upstream project-scan caching with get_or_scan, an audit-report slot and a documented 24-hour TTL. Use when sequential agents may reuse a compatible scan; validate freshness and analysis inputs. Not for model-answer caching, agent-run caching or per-file fingerprint gates."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,12 @@ metadata:
   canonical-name: cache
 ---
 # Project Cache
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
 
 ## When NOT to use
 
@@ -29,4 +35,3 @@ cache.set_audit_report(report)
 **Module:** `skills/cache`
 **Storage:** `.botte-cache/` directory
 **TTL:** 24 hours
-**Savings:** -50% re-scan tokens

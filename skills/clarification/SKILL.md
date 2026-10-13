@@ -1,6 +1,6 @@
 ---
 name: clarification
-description: "Ask up to five numbered questions before starting work, with a declared default per question so silence auto-fills and the assumption is flagged rather than hidden — one blocking question and secondary ones, answered by number or with auto. Use at the start of a workflow whose scope is ambiguous or where a wrong assumption would be expensive. Not for checking preconditions before acting — use preflight; not for choosing between two implementation paths — use decision-ladder."
+description: "Guidance for asking up to five targeted questions with explicit defaults when scope is ambiguous or a wrong assumption would be expensive. Explicit auto may accept optional defaults; silence is not approval for a blocking decision. Not for precondition checks (preflight) or choosing known implementation options (decision-ladder)."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -9,13 +9,19 @@ metadata:
 ---
 # Clarification Proactive
 
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
+
 ## When NOT to use
 
 - You need preconditions verified rather than requirements asked — use preflight.
 - The decision is a choice between known options — use decision-ladder.
-Up to 5 numbered questions before starting work. Silence = auto-fill with defaults.
+Ask up to five targeted numbered questions when unresolved scope materially affects the work. State a default for optional questions; explicit "auto" accepts those defaults. Silence does not answer a blocking question or authorize an action.
 
-**Trigger:** At the START of every agent's workflow (OBLIGATOIRE).
+**Trigger:** At the start of an ambiguous workflow when the answer affects scope, correctness or a required decision. Honor established user instructions and avoid repeating resolved questions.
 
 **Pattern:**
 ```
@@ -27,4 +33,4 @@ Réponds avec les numéros ou "auto"
 
 **Module:** `skills/clarification`
 **Generators:** portos_clarify(), dartagnan_clarify(), aramis_clarify(), etc.
-**Rule:** Silence = auto → fill defaults → flag `⚠️ Hypothèse: [valeur]`
+**Rule:** For optional questions, use an authorized default and flag `⚠️ Hypothèse: [valeur]`. Keep required answers or approvals pending; elapsed time is not approval.

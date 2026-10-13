@@ -1,6 +1,6 @@
 ---
 name: skill-finder
-description: "Find which skills, tools or MCP are relevant to a task by searching SKILL.md files locally — zero cloud tokens (lexical/fuzzy match, optional local-LLM rerank). This is the declared entry point for skill routing in this repository — use it first whenever a request could be served by more than one skill, and consult its cluster arbitration table before loading a neighbour. Use when you need to pick tools for a project or task and want to avoid spending a paid cloud model on the search step, when the user mentions skill search or tool selection, or when several local skills look interchangeable. Not for building a standing per-project skill profile — use skill-project-optimizer; not for choosing a subset under an explicit token budget — use context-budget."
+description: "Instructions for selecting skill files by lexical or fuzzy matching, with an optional configured model reranker. Use for ambiguous skill/tool choices and consult the arbitration table. This catalog supplies the files, not the search runtime. Not for per-project profiles or budget allocation."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: skill_finder
 ---
 # skill-finder — local, zero-token skill & tool search
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 ## Cluster arbitration — when two local skills look interchangeable
 
@@ -37,9 +41,9 @@ the cloud model free for the actual work.
 
 ## Two tiers
 
-- **Tier 0 — free (0 tokens total):** lexical + fuzzy match over each skill's
+- **Tier 0 — lexical matching:** lexical + fuzzy match over each skill's
   name, description, tags, triggers and full SKILL.md body. Deterministic.
-- **Tier 1 — local (0 cloud tokens):** for ambiguous queries, a local model
+- **Tier 1 — optional configured model:** for ambiguous queries, a local model
   (via [[llm-backends]]) re-ranks the shortlist. Still no cloud spend.
 
 ## Use it
@@ -53,7 +57,7 @@ python -m skills.skill_finder.cli "audit dead code" --roots ~/.claude/skills --j
 ```python
 from skills.skill_finder import find
 r = find("decide local vs cloud routing", top_k=5)
-r["cloud_tokens"]   # 0
+r.get("cloud_tokens") # runtime-reported field; not total host usage
 r["matches"]        # [{name, score, why, description, path, tokens_est}, …]
 ```
 
@@ -61,12 +65,9 @@ r["matches"]        # [{name, score, why, description, path, tokens_est}, …]
 skill library, a project's skills, etc.); defaults to this repo's `skills/`.
 Works whether or not a SKILL.md has YAML frontmatter — the body is always indexed.
 
-## Why it saves money
+## Evaluate a shortlist
 
-A coding agent normally burns expensive context having the cloud model read every
-skill description to decide what to load. `find_skills` returns a ranked shortlist
-for **0 cloud tokens**, so the cloud model only sees the few skills that matter —
-or none, when the local rerank is decisive.
+Use the installed runtime to rank candidate instructions, then check that the selected workflows actually fit the task. Compare loaded context and outcome quality against a declared baseline. The host agent may still consume model tokens to choose and follow instructions; this catalog supplies no measured saving.
 
 Exposed via [[llm-mcp]] as the `find_skills` tool. Related:
 `skill_project_optimizer` (rule-based per-project filtering), `auto_router`.

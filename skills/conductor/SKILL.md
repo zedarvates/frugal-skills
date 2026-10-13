@@ -1,6 +1,6 @@
 ---
 name: conductor
-description: "Route a high-level goal to an ordered, local-first plan of capabilities — the generalised router — and optionally EXECUTE the plan's read-only steps. Reads the capability registry/curator, composes steps ordered by the system's layers (SENSE→DECIDE→ACT→REMEMBER→GOVERN→DEPLOY), annotates each local vs cloud with a concrete command, and estimates the goal's effort. The executor runs the safe analysis steps unattended and confirm-gates anything that mutates state or escalates to the cloud. Use when the user states a goal and you need to decide which botte capabilities to use in what order (or run them), or asks 'how should I approach X with this toolkit'."
+description: "Guidance for upstream goal-to-plan orchestration through capability selection, layer ordering and command annotations. Use to plan Botte workflows or inspect optional execution modes. Runtime, capabilities and host authority must be verified; execution and confirmation gates belong to the compatible upstream implementation."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -9,9 +9,15 @@ metadata:
 ---
 # conductor — goal → ordered plan of capabilities
 
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
+
 The router, generalised: not "which model tier?" but "given this **goal**, which
 capabilities, in which order, and what stays local?". The plan is the product —
-you (or the agent) execute it; the Conductor never runs anything itself.
+the upstream planning mode emits it without executing steps. Optional upstream execution modes require their own prerequisites and authority checks.
 
 ```bash
 python -m skills.conductor.cli "test my desktop app and report crashes"
@@ -26,7 +32,7 @@ python -m skills.conductor.cli "..." --execute --confirm      # also run gated s
 ## How it plans
 
 1. **Curate** — picks the capabilities relevant to the goal ([[capabilities]]
-   curator, local lexical match, 0 tokens).
+   curator, lexical matching).
 2. **Order** — sorts them by the system's layers (SENSE → DECIDE → ACT →
    REMEMBER → GOVERN → DEPLOY): understand → decide → act → remember.
 3. **Annotate** — each step gets a concrete command, a local/cloud flag, and the
@@ -34,22 +40,21 @@ python -m skills.conductor.cli "..." --execute --confirm      # also run gated s
 4. **Estimate** — the goal's effort tier ([[auto-router]]) tells you whether any
    step's reasoning will escalate to the cloud.
 
-Output: an ordered list of steps, **0 cloud tokens** to produce. It composes the
-module collection into a coherent plan per goal — the conductor of the system.
+Expected planning output is an ordered list of annotated steps. Check that the listed commands and capabilities exist in the installed runtime before attempting the plan.
 
 ## Executing the plan
 
 The plan can be *run*, not just read. The executor classifies every step:
 
 - **safe** — read-only analysis (`directives_audit`, `metrics`, `infra_advisor`,
-  `checkup`, `cluster`, `llm_backends`) → runs unattended, 0 cloud tokens.
+  `checkup`, `cluster`, `llm_backends`) → upstream read-only execution category.
 - **gated** — mutates state, generates artifacts, or escalates to the cloud →
   runs only with `--confirm` / `confirm=true`.
 - **needs_args** — the command still has an unfilled `<placeholder>` → never runs.
 
 `--dry-run` classifies everything and runs nothing (a preview). A failing step
 yields a non-zero exit so CI can react. The runner is injectable, so the
-behaviour is fully unit-tested without spawning subprocesses.
+upstream implementation can be tested with a substituted runner. No such runtime test evidence is bundled here.
 
 Exposed via [[llm-mcp]] as `conduct` (plan) and `execute_plan` (plan + run safe
 steps). Built on [[capabilities]], [[auto-router]]; pairs with the [[control-loop]]

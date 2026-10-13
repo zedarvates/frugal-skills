@@ -1,6 +1,6 @@
 ---
 name: llm-mcp
-description: "MCP server that lets Claude Code (or any MCP client) discover and call local LLM servers (LM Studio, Ollama, …) as tools, to offload cheap tasks off the cloud. Use when the user wants to wire local models into their agent, register an MCP server, or have the agent automatically route simple tasks to local hardware."
+description: "Instructions for the upstream workflow: MCP server that lets Claude Code (or any MCP client) discover and call local LLM servers (LM Studio, Ollama, …) as tools, to offload cheap tasks off the cloud. Use when the user wants to wire local models into their agent, register an MCP server, or have the agent automatically route simple tasks to local hardware."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: llm_mcp
 ---
 # llm-mcp — Local LLM tools over Model Context Protocol
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 Exposes [[llm-backends]] as MCP tools so an agent can route work to local models
 on its own. Pure stdlib, stdio JSON-RPC 2.0, no dependencies.
@@ -20,15 +24,14 @@ on its own. Pure stdlib, stdio JSON-RPC 2.0, no dependencies.
 | `list_models` | List models the registered backends expose |
 | `audit_local_usage` | Local-usage report + hardware-aware setup steps |
 | `route_task` | Recommend cheapest tier + a concrete local backend/model |
-| `local_chat` | Run a prompt on a local model (0 cloud tokens) |
+| `local_chat` | Run a prompt through a configured local endpoint |
 | `session_handoff` | Create, validate, or render a bounded `brief_only` handoff |
 | `agent_state` | Negotiate agent capabilities, authority, and mutation scopes |
 | `recipe_run` | Lazily run one locally approved read-only declarative recipe |
 
 ## Register in Claude Code
 
-Add to `.mcp.json` at the project root (an example ships at
-`configs/mcp.example.json`):
+After installing the compatible runtime, adapt this example in the target project. `configs/mcp.example.json` belongs to the upstream project and is not bundled here:
 
 ```json
 {
@@ -57,7 +60,7 @@ meta-tool — the same pattern this very harness uses (ToolSearch). Call
 one round trip. `tools/call` still dispatches **any** tool by name regardless of
 what was listed — lazy loading only shrinks the catalog, not what's callable.
 
-Measured saving: ~3.3k tokens (84% of the tool-schema cost). Disable with
+Measure the schemas the installed server actually lists and the host's token accounting. Disable lazy listing with
 `BOTTE_MCP_LAZY_TOOLS=0` for a client that expects the full catalog upfront.
 
 `recipe_run` remains outside the core list. Its schema is discovered only when
@@ -78,4 +81,4 @@ printf '%s\n' \
 
 Tell the agent: *route classification / extraction / short summaries through
 `local_chat`, keep architecture & security reasoning on the cloud.* That single
-rule typically moves 30-50% of calls to zero-cost local inference.
+rule is a routing preference, not a measured reduction or a cost guarantee. Respect the task's quality requirements and inspect actual endpoints.

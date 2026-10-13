@@ -1,6 +1,6 @@
 ---
 name: session-handoff
-description: "Create, validate, and render a bounded provider-neutral session brief without storing raw transcripts or secrets. Use before switching model, agent, host, or context window."
+description: "Instructions for the upstream workflow: Create, validate, and render a bounded provider-neutral session brief without storing raw transcripts or secrets. Use before switching model, agent, host, or context window."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: session_handoff
 ---
 # session-handoff — portable continuation without hidden state
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 `session_handoff` captures the minimum verified state needed by another coding
 agent. It is local, stdlib-only, and explicit that the receiving agent gets a
@@ -44,7 +48,9 @@ the schema without adding it to the always-on tool prefix.
   are never collected automatically.
 - Safety: an active brief needs a next step; a blocked brief needs a blocker.
 
-The implementation is conceptually informed by Traycer's durable agent metadata
-and no-transcript separation, but was written from scratch for this toolkit's
-local-first, dependency-free architecture. See
-`docs/plans/2026-08-06_traycer-inspired-session-handoff.md` for provenance.
+The upstream skill cites Traycer's durable-metadata and no-transcript design
+concepts. Its referenced provenance plan is not supplied or independently verified
+here; see the open entry in this catalog's THIRD_PARTY_NOTICES.md. Do not treat
+that citation as verified licence evidence or assume an external implementation
+is bundled. Check the installed handoff contract before asserting its privacy
+properties.

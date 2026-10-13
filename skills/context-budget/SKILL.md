@@ -1,13 +1,19 @@
 ---
 name: context-budget
-description: "Pick the optimal set of skills/docs to load for a task under a token budget — an exact 0/1 knapsack (maximize relevance while summed token cost stays under budget), not an LLM 'decide what's relevant' call. Deterministic, stdlib, 0 cloud tokens. Cuts the always-on context cost (loading the whole skill catalog every turn). Use when you want to load only the most relevant context within a budget, or to decide which skills/docs an agent should read for a task. Not for measuring how much the prefix already costs — use context-profiler; not for splitting one body of context into reusable typed slices — use context-slicer; not for ranking a single query without a budget — use skill-finder."
+description: "Instructions for upstream context allocation under a token budget using a 0/1 knapsack model over relevance and token cost. Use to plan which skills or documents to load; verify the installed solver, cost estimates and scaling before interpreting optimality. Not for prefix measurement (context-profiler), typed slicing (context-slicer) or ranking without a budget (skill-finder)."
 license: MIT
 metadata:
   version: "1.0.0"
   domain: agent-skills
   canonical-name: context_budget
 ---
-# context-budget — optimal context under a token budget
+# context-budget — context allocation under a token budget
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
 
 ## When NOT to use
 
@@ -17,9 +23,7 @@ metadata:
 
 The OR-Tools principle applied to the agent's always-on cost: choosing *which*
 skills/docs to load is a **0/1 knapsack** — maximize total relevance while the
-summed token cost stays under a budget. That's an exact deterministic solver
-(stdlib DP), so it costs **0 tokens** and beats the greedy "take the top matches
-until full" heuristic.
+summed token cost stays under a budget. The upstream design uses dynamic programming for this 0/1 model. Verify the installed solver, relevance inputs, token estimates and any scaling before interpreting the result as optimal for the original inputs.
 
 ```bash
 python -m skills.context_budget.cli "optimize slow postgres queries and add tests" --budget 3000
@@ -29,15 +33,14 @@ python -m skills.context_budget.cli "<task>" --budget 4000 --json
 ## How it selects
 
 1. **Rank** — score every skill against the task lexically ([[skill-finder]],
-   0 tokens), with each skill's token cost.
+   matching), with each skill's token cost.
 2. **Knapsack** — `knapsack(items, budget)` finds the subset that maximizes
    summed relevance subject to `Σ tokens ≤ budget` (exact DP, token costs scaled
-   to bound the table). Optimal, not greedy.
+   to bound the table). Inspect how scaling affects the original budget and objective.
 3. **Frame** — report the chosen set, tokens used, relevance captured, and the
    saving vs loading the whole catalog.
 
-On this repo a typical task loads ~4 skills (~2k tok) instead of the whole
-~36-skill catalog (~15k tok) — an ~85% cut in always-on context for that task.
+No typical subset size or savings is established by this catalog. Report the actual chosen inventory, budget and measured or estimated costs from the compatible installed runtime.
 
 The `knapsack(items, budget)` engine is generic (takes `Item(name, kind, tokens,
 relevance)`), so docs ([[docs-steward]]) or any context source plug in the same

@@ -1,6 +1,6 @@
 ---
 name: monte-cristo
-description: "Independent strategic outsider above the blue and red teams. Use for architecture resets, high-cost research decisions, inherited assumptions, and stalled adversarial reviews; do not use for routine review or autonomous mutation."
+description: "Instructions for the upstream workflow: Independent strategic outsider above the blue and red teams. Use for architecture resets, high-cost research decisions, inherited assumptions, and stalled adversarial reviews; do not use for routine review or autonomous mutation."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: monte_cristo
 ---
 # Monte Cristo — strategic outsider
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 Monte Cristo judges the frame that both the blue and red teams may share. It
 reconstructs the objective, labels evidence, tests inherited assumptions, and

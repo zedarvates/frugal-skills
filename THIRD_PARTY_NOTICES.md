@@ -47,6 +47,7 @@ This restates the standing boundary (internal register MEM-018):
 | Google Co-Scientist, Red Teaming LLM, adversarial multi-agent literature | cardinal | red-team concepts | papers | LOW |
 | Mark Kashef and Anthropic, "A Harness for Every Task" | dynamic-workflows | orchestration patterns | upstream | LOW |
 | Google OR-Tools | context_budget, decision_ladder | 0/1 knapsack idea, no code | Apache-2.0 | LOW |
+| Traycer (exact original source unverified) | session_handoff | reported durable-metadata and no-transcript design concepts; no external implementation bundled | not confirmed | TO CHECK |
 
 ## Verified sources
 
@@ -109,6 +110,12 @@ identifier here, and state whether the use is compatible.
   no code was copied.
 - **Stanford AutoMem** — cited as the inspiration for memory-as-capability.
   Identify whether this is a paper or a repository, and its terms.
+- **Traycer** — session_handoff originally cited durable agent metadata and
+  no-transcript separation, with a provenance-plan path not supplied in this
+  catalog. The original source and its terms have not been independently
+  verified. This entry records that unresolved citation, not a completed licence
+  review; do not redistribute any external implementation or copied material
+  without resolving the applicable source and obligations.
 
 ## Low risk
 

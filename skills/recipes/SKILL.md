@@ -1,6 +1,6 @@
 ---
 name: recipes
-description: "Observe content-free botte-llm call shapes, review repeated read-only workflows, and run only locally approved declarative recipes."
+description: "Instructions for the upstream workflow: Observe content-free botte-llm call shapes, review repeated read-only workflows, and run only locally approved declarative recipes."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: recipes
 ---
 # recipes — Verified read-only MCP workflows
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 Recipes remove repeated LLM orchestration from common `botte-llm` workflows.
 They are local declarative data, never generated Python or shell code.

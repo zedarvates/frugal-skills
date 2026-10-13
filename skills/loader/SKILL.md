@@ -1,6 +1,6 @@
 ---
 name: loader
-description: "Assemble the context a delegated sub-agent needs — the shared core agent file plus the agent's own delta — with single and batch loading and a helper that suggests which agents fit a task. Use when spawning named agents that must share one contract. Not for choosing among tools — use tool-router or skill-finder; not for loading skills into the context under a budget — use context-budget."
+description: "Instructions for the upstream workflow: Assemble the context a delegated sub-agent needs — the shared core agent file plus the agent's own delta — with single and batch loading and a helper that suggests which agents fit a task. Use when spawning named agents that must share one contract. Not for choosing among tools — use tool-router or skill-finder; not for loading skills into the context under a budget — use context-budget."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: loader
 ---
 # Pre-Prompt Loader
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 ## When NOT to use
 

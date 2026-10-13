@@ -1,6 +1,6 @@
 ---
 name: docs-steward
-description: "Scoped documentation map for multi-component projects (server + client + tools + …). Detects components, classifies every doc as global vs component-scoped, and produces a per-component index (DOCS.md) listing local docs + links to the relevant global docs — so an LLM coder bounded to one component loads only its scope, not every other component's documentation. Frames token cost (full project docs vs scoped load) and treats .md as LLM-facing, .html as human reference. Use when a project has several components and you want to cut the docs an agent must read, or asks how to organise docs for a monorepo."
+description: "Instructions for the upstream workflow: Scoped documentation map for multi-component projects (server + client + tools + …). Detects components, classifies every doc as global vs component-scoped, and produces a per-component index (DOCS.md) listing local docs + links to the relevant global docs — so an LLM coder bounded to one component loads only its scope, not every other component's documentation. Frames token cost (full project docs vs scoped load) and treats .md as LLM-facing, .html as human reference. Use when a project has several components and you want to cut the docs an agent must read, or asks how to organise docs for a monorepo."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: docs_steward
 ---
 # docs-steward — the right docs, at the right scope
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 A monorepo accumulates docs at several scopes: **global** docs at the root, and
 **component** docs inside each component's folder. When an LLM coder is *bounded*
@@ -44,7 +48,7 @@ python -m skills.docs_steward.cli knowledge-audit .       # Wiki/second-brain pr
    telling a bounded coder exactly what to load. Preview by default; `--write`
    to commit the files.
 
-Output: a JSON map, 0 cloud tokens to produce. Exposed via [[llm-mcp]] as
+Expected upstream output: a JSON map. Confirm the runtime and actual result. Exposed via [[llm-mcp]] as
 `docs_map`. Related: [[directives-audit]] (agent-guidance file health),
 [[metrics]] (per-component cost), [[checkup]].
 

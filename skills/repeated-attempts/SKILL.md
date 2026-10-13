@@ -1,6 +1,6 @@
 ---
 name: repeated-attempts
-description: "Policy A10 detector (docs/local-analysis-policy.md) — finds identical failed retries in local event logs (same action + same error + same fingerprints, no intermediate context change). Reuses loop-optimizer.failures.failure_signature. Transient errors (timeout/network/429/503) are excluded. Deterministic, 0 cloud tokens. Every finding carries the five mandatory policy fields. Use before rerunning a failed command or during checkup."
+description: "Instructions for reviewing identical failed retries in upstream event logs, accounting for context and fingerprint changes and excluding declared transient errors. Verify the installed detector and evidence before treating a retry as redundant."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: repeated_attempts
 ---
 # repeated-attempts — anomaly A10 detector
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 Implements A10 of [[../../docs/local-analysis-policy.md]]: two or more
 consecutive failed attempts with the same signature are an anomaly.

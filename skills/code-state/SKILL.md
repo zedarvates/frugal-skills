@@ -1,6 +1,6 @@
 ---
 name: code-state
-description: "Policy A2 detector (docs/local-analysis-policy.md) — finds mutable module-level state (dict/list/set assignments) and circular imports via a static AST import graph. TYPE_CHECKING blocks are ignored. Deterministic, 0 cloud tokens. Every finding carries the five mandatory policy fields. Use before isolating tests or flattening package imports. Not for duplicate bodies — use code-duplication (A6); not for passthrough wrappers — use code-wrappers (A3)."
+description: "Instructions for upstream Policy A2 review of mutable module-level state and cycles in the local AST import graph, excluding TYPE_CHECKING blocks. Use before isolating tests or flattening imports and inspect the five-field evidence. Not for duplication (code-duplication) or passthrough functions (code-wrappers)."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -9,12 +9,18 @@ metadata:
 ---
 # code-state — anomaly A2 detector
 
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
+
 ## When NOT to use
 
 - The smell is a duplicated function body — use code_duplication.
 - The smell is a chain of passthrough functions — use code_wrappers.
 
-Implements A2 of [[../../docs/local-analysis-policy.md]]:
+The upstream detector is described by A2 of the upstream `docs/local-analysis-policy.md` (not bundled here):
 
 - **etat_global** — module-level `NAME = {}` / `[]` / `set()` / `dict()`
   (and common constructors). Constants and `None` are ignored. Assignments
@@ -29,4 +35,4 @@ python -m skills.code_state.cli skills --json
 python -m skills.code_state.test_code_state
 ```
 
-Report-only: never fails the build. Pairs with code_wrappers (A3).
+The documented upstream mode is report-only; verify the installed command exit status and CI integration. Pairs with code_wrappers (A3).

@@ -1,6 +1,6 @@
 ---
 name: agent-state
-description: "Validate and reconcile backend-neutral agent lifecycle state, explicit capability support, and repo-relative mutation scopes. Use before routing, resuming, messaging, or running concurrent mutating agents."
+description: "Guidance for the upstream agent-state contract: backend-neutral lifecycle state, declared capabilities and repository-relative mutation scopes. Use before planning routing, continuation, messaging or concurrent writes; verify actual host support instead of inferring capabilities."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,12 @@ metadata:
   canonical-name: agent_state
 ---
 # agent-state — explicit authority and capability negotiation
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
 
 `agent_state` prevents an orchestrator from guessing that every provider can
 resume, fork, read transcripts, send messages, switch models, or mutate a
@@ -36,8 +42,7 @@ state = build_agent_state(
 ```
 
 The lazy MCP tool `agent_state` exposes `create`, `validate`, `reconcile`,
-`eligible`, and `conflicts`. It exchanges JSON objects only and uses zero cloud
-tokens. The JSON contract is `docs/schemas/agent-state-v1.schema.json`.
+`eligible`, and `conflicts`. Its documented interface exchanges JSON objects. The schema is an upstream resource, `docs/schemas/agent-state-v1.schema.json`, not bundled in this catalog.
 
 `meta_harness` persists queued/working/final observations in each session, and
 `conductor.execute` returns the observation history beside every step result.

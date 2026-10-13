@@ -1,6 +1,6 @@
 ---
 name: structured-output
-description: "Compact LLM-facing JSON and optionally emit round-trip-verified TOON for beneficial tabular data."
+description: "Instructions for the upstream workflow: Compact LLM-facing JSON and optionally emit round-trip-verified TOON for beneficial tabular data."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: structured_output
 ---
 # structured-output — adaptive JSON/TOON presentation
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 Use this module at the boundary between programmatic JSON data and LLM-facing
 text. JSON remains canonical for storage, APIs, schemas, JSON-RPC, caches, and
@@ -90,7 +94,7 @@ payloads, expected answers, and model answers are excluded.
 `candidate_latency` measures formatting plus generation only for values that
 clear the exact adaptive gates. Its report has `activation_authority=false`;
 it diagnoses typical and tail latency but cannot activate a model profile.
-`--response-mode final` measures the free `FINAL:` contract, while
+`--response-mode final` measures the unwrapped `FINAL:` contract, while
 `--response-mode structured` uses the LM Studio schema constraint to isolate
 bounded answer generation. The modes write separate machine-local reports.
 

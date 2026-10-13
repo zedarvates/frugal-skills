@@ -1,6 +1,6 @@
 ---
 name: prefix-tree
-description: "Registry of each agent's stable prompt prefix in one compressed trie, so feedback loops and multi-agent exchanges send only the diff instead of the full prompt (register, diff, common, stats). Deterministic and local, with a store under ~/.botte. Use when several agents share a large common prefix and the repeated transmission is the cost. Not for deleting sections that nobody uses — use prefix-pruner; not for per-loop windows over a shared context — use context-windows; not for detecting repeated prompts in the logs — use prompt-repetition."
+description: "Instructions for the upstream workflow: Registry of each agent's stable prompt prefix in one compressed trie, so feedback loops and multi-agent exchanges send only the diff instead of the full prompt (register, diff, common, stats). Deterministic and local, with a store under ~/.botte. Use when several agents share a large common prefix and the repeated transmission is the cost. Not for deleting sections that nobody uses — use prefix-pruner; not for per-loop windows over a shared context — use context-windows; not for detecting repeated prompts in the logs — use prompt-repetition."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: prefix_tree
 ---
 # prefix-tree — one trie of agent prefixes, then diffs only
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 ## Purpose
 

@@ -1,6 +1,6 @@
 ---
 name: checkup
-description: "Run the canonical, already-optimal project checkup in one command — policy presence, directives health, per-component metrics, infra tips, duplication, recurring Markdown review, Wiki/second-brain integrity, and drift detection — so you never have to hand-write a good checkup prompt. Use when the user says 'do a complete checkup', 'botte doctor', after a component update, when onboarding to a project, or when multiple agents/devs may have caused drift."
+description: "Guidance for the upstream project-checkup sequence: policy, directives, metrics, infrastructure, duplication, security, documentation, knowledge integrity and drift. Use after updates or during onboarding. Run only with the compatible runtime and inspect collected evidence; one checkup does not establish completeness or optimality."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -9,9 +9,13 @@ metadata:
 ---
 # checkup — the canonical project checkup ("botte doctor")
 
-So a "complete checkup" doesn't depend on you writing a good prompt: one command
-runs the standard sequence in the right order and prints a single verdict, all
-local / 0 cloud tokens.
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
+
+The upstream command assembles a documented review sequence and prints a verdict based on the checks that ran. Verify detector availability and evidence; a verdict does not prove complete coverage or an optimal procedure.
 
 ```bash
 python -m skills.checkup.cli            # current dir
@@ -43,7 +47,7 @@ otherwise. Pure assembly of existing modules — no new skill, no new report for
 4. **infra** — hardware/software/MCP cluster tips (+ ASCII diagram)
 5. **duplication** — stdlib AST duplicate-function scan
 6. **security** — taint / data-flow scan ([[fallow-like]] `TaintAnalyzer`),
-   CWE-tagged; high-severity findings become drift. 0 cloud tokens.
+   CWE-tagged; high-severity findings are considered for drift review.
 7. **docs review** — recurring Markdown due/current status from
    [[docs-steward]]. Never-reviewed bootstrap files are informational; an
    expired interval or explicitly watched content change becomes drift.
@@ -58,17 +62,15 @@ Then points at the deep code audit (secrets/dead-code) for when you want it.
 
 A component update or another dev/agent introduces **drift** — stale directives,
 unwired MCP, an oversized CLAUDE.md, a missing policy. `/checkup` catches all of
-it in one pass, with a fixed optimal procedure, instead of an ad-hoc prompt that
-may be sub-optimal and may not prioritise local models.
+the configured sequence. Confirm which checks ran and treat any missing evidence or detector as a reported limitation.
 
 ## On pull requests
 
 `--pr-comment` prints a verdict-first Markdown comment (carrying a stable marker
 so a bot can edit it in place), **including the security section** — so the
-taint/data-flow scan rides into CI for free. The `🧦 Botte Checkup (PR)` GitHub
+taint/data-flow section can be reviewed with the rest of the CI output. The `🧦 Botte Checkup (PR)` GitHub
 Action (`.github/workflows/botte-pr-checkup.yml`) runs this on every PR and
-posts/updates a single comment via `gh` — 0 cloud tokens, no extra dependencies.
-Any project that deployed the toolkit can reuse the same workflow.
+can post/update a comment via `gh` when that separate workflow, dependencies, credentials and permissions are configured. The workflow is not included in this catalog; verify its behavior before reuse.
 
 Related: [[preflight]] (enforces prefer-local every turn), [[infra-advisor]],
 [[metrics]], [[trends]], [[directives-audit]], [[bootstrap]].

@@ -1,6 +1,6 @@
 ---
 name: llm-backends
-description: "Discover, audit and use local LLM servers (LM Studio, Ollama, LocalAI, vLLM, llama.cpp) on this machine or the network to offload work from the cloud and save tokens. Use when the user mentions local models, LM Studio, Ollama, 'run it locally', token savings via local hardware, or wants to know what models their machine can run."
+description: "Instructions for the upstream workflow: Discover, audit and use local LLM servers (LM Studio, Ollama, LocalAI, vLLM, llama.cpp) on this machine or the network to offload work from the cloud and save tokens. Use when the user mentions local models, LM Studio, Ollama, 'run it locally', token savings via local hardware, or wants to know what models their machine can run."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: llm_backends
 ---
 # llm-backends — Local LLM discovery, audit & routing
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 Turn idle local hardware into a token-saving tier. Every task served by a local
 model is a task **not** billed to the cloud.
@@ -35,7 +39,7 @@ python -m skills.llm_backends.cli list
 # Audit: are local models used? what can this machine run? next steps?
 python -m skills.llm_backends.cli audit --fresh
 
-# Run a prompt locally (0 cloud tokens)
+# Run a prompt through a configured local endpoint; verify actual usage
 python -m skills.llm_backends.cli chat "classify: bug or feature?" --max-tokens 128
 
 # Suggest a local model for a project (adaptive per project type)
@@ -61,7 +65,7 @@ best = registry.best_chat_backend()      # lowest-latency chat backend
 model = registry.preferred_model(best)   # coder/instruct over voice/reasoning
 
 res = quick_chat("summarize in 1 line: ...", max_tokens=200)
-print(res.text, res.total_tokens)        # all local — no cloud cost
+print(res.text, res.total_tokens)        # inspect the response and configured endpoint; this field excludes host orchestration usage
 ```
 
 ## Supported backends
@@ -80,7 +84,7 @@ print(res.text, res.total_tokens)        # all local — no cloud cost
 
 1. **Audit** finds reachable local backends and profiles RAM/VRAM/GPU.
 2. **Route** sends local-suitable tasks (see `tiered_router` L0/L1) to a local model.
-3. **Call** runs them via the OpenAI-compatible client — zero cloud tokens.
+3. **Call** uses an OpenAI-compatible client. Check the endpoint, any forwarding, and actual provider usage before claiming the call remained local.
 4. **Onboard** users with no local model, recommending the largest model their
    hardware can run and the right server to install.
 

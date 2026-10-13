@@ -1,6 +1,6 @@
 ---
 name: mcp-gateway
-description: "MCP Gateway — expose all the toolkit skills comme outils MCP. Découverte automatique, schémas d'entrée, transport stdio. Compatible Claude Code, Codex, Cursor, et tout client MCP."
+description: "Instructions for the upstream workflow: MCP Gateway — expose all the toolkit skills comme outils MCP. Découverte automatique, schémas d'entrée, transport stdio. Compatible Claude Code, Codex, Cursor, et tout client MCP."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: mcp_gateway
 ---
 # mcp-gateway — MCP Gateway
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 Expose l'ensemble des skills the toolkit comme outils MCP (Model Context Protocol).
 Un seul point d'entrée pour que n'importe quel agent (Claude Code, Codex, Cursor, etc.)

@@ -1,6 +1,6 @@
 ---
 name: trajectory
-description: "Trajectory learning — stores solver trajectories and searches similar past optimizations to inform future decisions"
+description: "Instructions for the upstream workflow: Trajectory learning — stores solver trajectories and searches similar past optimizations to inform future decisions"
 license: MIT
 metadata:
   version: "1.0.0"
@@ -9,10 +9,14 @@ metadata:
 ---
 # Trajectory learning
 
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
 ## Overview
 
 Stocke les trajectoires d'optimisation des solveurs déterministes.
-Permet de retrouver des solutions similaires déjà calculées → 0 token, 0 latence.
+Décrit la recherche de solutions antérieures similaires. Mesurer la latence, vérifier les prérequis et valider la pertinence avant réutilisation.
 
 Compatible avec `~/.hermes/scripts/trajectory_search.py` (Hermes Trajectory Memory).
 

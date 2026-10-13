@@ -1,6 +1,6 @@
 ---
 name: code-fingerprint
-description: "Hash every function, method, class and module (SHA-256 over normalized source) so a re-analysis only touches what actually changed, with a persistent cache under .botte-cache/fingerprints.json and roughly -80 percent analysis cost on stable codebases. Deterministic, local, 0 cloud tokens. Use as the gate in front of any audit or checkup run. This is not a detector: it decides what to re-run, and the findings themselves come from code-complexity (A1), code-duplication (A6), code-state (A2) and code-wrappers (A3)."
+description: "Instructions for the upstream SHA-256 code-fingerprint cache and re-analysis gate. Use to assess whether an earlier analysis can be reused after checking code, analysis configuration and dependency changes. This is not a findings detector; use code-complexity, code-duplication, code-state or code-wrappers for findings."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -9,7 +9,13 @@ metadata:
 ---
 # Code Fingerprinting (P13)
 
-Hash every function/method/class and only re-analyze what changed.
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
+
+The upstream fingerprint workflow hashes code to identify candidate reuse. Check analysis settings, dependencies and cache validity as well as source changes before skipping an analysis.
 
 ## When NOT to use
 
@@ -19,8 +25,6 @@ Hash every function/method/class and only re-analyze what changed.
   diff_language or prefix_tree.
 
 **Trigger:** Before every audit — check fingerprints, skip unchanged files.
-
-**Token savings:** -80% on re-analysis of stable codebases
 
 **Usage:**
 ```python

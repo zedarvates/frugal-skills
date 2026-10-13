@@ -1,6 +1,6 @@
 ---
 name: token-shaper
-description: "Decide the per-turn shaping policy for a query and an agent profile — compression level, compression ratio, output token target and verbosity steer — so the effort matches the task instead of being fixed. Deterministic, 0 cloud tokens. Use when you need to answer how much to compress and how long the answer should be for one specific turn. Not for compressing a payload — use universal-compressor (content) or token-compressor (structure); not for measuring the always-on prefix — use context-profiler."
+description: "Instructions for selecting an upstream per-turn shaping policy: compression level, output target and verbosity. Verify the runtime and measure task quality and costs. Not for actually compressing a payload or measuring the always-on prefix."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: token_shaper
 ---
 # token-shaper — per-turn shaping policy
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 ## Purpose
 

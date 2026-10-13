@@ -1,6 +1,6 @@
 ---
 name: decision-ladder
-description: "Ponytail-inspired YAGNI enforcement — explicit need, existing code, stdlib, native platform, installed dependency, one-liner, then evidence-gated new code."
+description: "Instructions for the upstream workflow: Ponytail-inspired YAGNI enforcement — explicit need, existing code, stdlib, native platform, installed dependency, one-liner, then evidence-gated new code."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: decision_ladder
 ---
 # Decision Ladder
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 Ponytail-inspired YAGNI enforcement for this toolkit. Before writing ANY code, climb this ladder. Each rung that passes saves the cost of every rung above it.
 
@@ -38,7 +42,7 @@ report = audit_task_list([
     "strip HTML tags from string",
     "implement custom OR-Tools solver",
 ])
-# → avoidable_pct: 80%, lines_saved: 85
+# Inspect the report from the actual run; no avoided work or line count is established by this example.
 ```
 
 ## Integration

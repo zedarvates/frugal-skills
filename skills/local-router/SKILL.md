@@ -1,6 +1,6 @@
 ---
 name: local-router
-description: "Route a task to a local model when the hardware can serve it — a task-type taxonomy (simple text, complex reasoning, vision classify/detect/OCR, speech to text, text to speech, image generation) mapped onto the local endpoints already present, for a reported 40 to 60 percent of cloud tokens moved local. Use when a task is cheap enough to run on local hardware. Not for deciding the model tier from task complexity — use nn-router; not for selecting a tool — use tool-router; not for the extraction step that turns media into text before a model sees it — use media-loader."
+description: "Instructions for matching tasks to separately configured local text, vision, speech or image capabilities. Verify hardware, models and endpoint availability before routing. Not for choosing a model tier, selecting a tool or performing media extraction."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: local_router
 ---
 # local-router — prefer local over cloud
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 ## Purpose
 

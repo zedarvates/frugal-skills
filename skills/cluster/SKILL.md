@@ -1,6 +1,6 @@
 ---
 name: cluster
-description: "Treat the homelab/micro-cluster as one schedulable resource — discover every reachable machine and spread cheap work across them (least-recently-used first) so idle boxes get the next task, recovering wasted local capacity instead of paying the cloud. Use to see cluster status, route a task to the idlest machine, or hand a task to a trusted agent on another machine. Also use when the user mentions homelab, cluster, idle machines, load balancing, or distributing work across machines."
+description: "Instructions for upstream cluster discovery, configured-backend selection and task delegation. Use to plan work across a trusted homelab or inspect its declared capacity. Verify endpoints, receiver policy and capability before sending tasks; this catalog does not deploy a receiver or guarantee backend availability."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,12 @@ metadata:
   canonical-name: cluster
 ---
 # cluster — the homelab as one schedulable resource
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
 
 Idle local capacity is recovered cost. Instead of always hitting the same backend
 (or the cloud), spread work across every reachable machine.
@@ -32,23 +38,23 @@ python -m skills.cluster.cli delegate node-b.example "restart the model server"
 `delegate(host, task)` POSTs `{"task": …}` to a machine's agent endpoint
 (`BOTTE_AGENT_<host>` env or `--url`). The endpoint host must match `host`;
 non-loopback delegation requires HTTPS and a token from
-`BOTTE_AGENT_TOKEN_<host>` or `BOTTE_AGENT_TOKEN`. It **never runs privileged maintenance
-itself** — wire a trusted agent (e.g. Hermes, which has the rights to do simple
-machine maintenance) on each box to receive and execute tasks. No endpoint
-configured → safe no-op that tells you how to wire one.
+`BOTTE_AGENT_TOKEN_<host>` or `BOTTE_AGENT_TOKEN`. The delegation client hands
+off the task; execution authority belongs to the configured receiver. Inspect
+that receiver's allowed actions before delegation. If no endpoint is configured,
+report the missing prerequisite instead of claiming that the task ran.
 
-> Security: elevated-rights machine maintenance stays in *your* agent on each
-> machine; botte only routes and hands off. The bundled HTTP receiver is for
-> loopback use; expose it on a LAN only behind a trusted HTTPS reverse proxy.
+> Security: privileged maintenance requires an explicitly configured receiver
+> policy. The separately installed upstream HTTP receiver is intended for
+> loopback use; LAN exposure requires a trusted HTTPS reverse proxy and
+> authentication appropriate to the deployment.
 
 
 ## Reference machine-agent (deploy on each box)
 
-Until your agent (Hermes) exposes an endpoint, run the bundled receiver — it
-accepts delegated tasks **safely**: a whitelist of *named* read-only actions
+Until your agent (Hermes) exposes an endpoint, inspect and configure the upstream receiver. Its documented boundary is a whitelist of *named* read-only actions
 (`ping`, `machine_status`, `disk`, `local_backends`), **never arbitrary shell**,
 loopback by default, token-gated for any non-loopback bind. Privileged
-maintenance handlers are deliberately absent until you scope the policy.
+maintenance is a separate explicitly configured mode, described below.
 
 ```bash
 python -m skills.cluster.agent serve --token "$BOTTE_AGENT_TOKEN"
@@ -72,8 +78,7 @@ python -m skills.cluster.agent serve --host 0.0.0.0 --token "$BOTTE_AGENT_TOKEN"
 #   {"task":{"action":"run","args":{"name":"restart_ollama","confirm":true}}}
 ```
 
-Defaults are safe: with no `--commands` file, **no** maintenance is possible —
-only the read-only actions. Maintenance on a non-loopback bind requires a token.
+The documented upstream default without a `--commands` file permits only named read-only actions. Confirm that the installed receiver enforces this boundary and that non-loopback maintenance uses the required authentication and transport configuration.
 
 Exposed via [[llm-mcp]] as `cluster_status`. Related: [[llm-backends]]
 (discovery), [[infra-advisor]] (per-machine tips), [[auto-router]].

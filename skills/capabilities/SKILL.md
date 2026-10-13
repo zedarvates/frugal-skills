@@ -1,6 +1,6 @@
 ---
 name: capabilities
-description: "The system's self-model — a capability registry (scans every SKILL.md into a layered tree SENSE→DECIDE→ACT→REMEMBER→GOVERN→DEPLOY) plus a 'curator' that picks the right capabilities for a goal locally. Use to see the whole toolkit as a system/arborescence, to let an agent discover what the toolkit can do, or as the data the Conductor reads to compose a plan."
+description: "Guidance for the upstream capability registry and lexical curator, organized as SENSE, DECIDE, ACT, REMEMBER, GOVERN and DEPLOY. Use to inspect the toolkit map or plan capability selection. A catalog entry describes a workflow; it does not prove that its runtime is installed or available."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -9,8 +9,13 @@ metadata:
 ---
 # capabilities — the system's map of itself (registry + curator)
 
-Turns the 26 modules from a *collection* into a *system*: one self-describing
-tree the rest can reason over.
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
+
+The upstream registry organizes available module descriptions into a layered tree for planning. Inventory entries must be checked against actual installed capabilities.
 
 ```bash
 python -m skills.capabilities.cli map               # ASCII layered system tree
@@ -30,12 +35,12 @@ python -m skills.capabilities.cli curate "test my desktop app"
 | **DEPLOY** | wire into projects & measure |
 
 Each skill's layer comes from a `layer:` field in its SKILL.md frontmatter, else
-a built-in map, else ACT. Generated snapshot: [`docs/system-map.txt`](../../docs/system-map.txt).
+a built-in map, else ACT. The generated `docs/system-map.txt` snapshot belongs to the upstream runtime and is not bundled here.
 
 ## The curator
 
 `curate(goal)` ranks the capabilities most relevant to a goal (local lexical
-match, **0 tokens**) — the librarian that hands the Conductor (and you) the right
+match) — the librarian that hands the Conductor (and you) the right
 branches of the tree to use. Built on [[skill-finder]].
 
 This registry is the foundation for the Conductor (goal → decision tree → ordered

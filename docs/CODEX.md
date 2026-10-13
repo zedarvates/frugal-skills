@@ -1,6 +1,6 @@
 # Frugal Skills for Codex
 
-Version 1.0.0 packages the existing 115 instruction workflows. It installs no MCP
+Version 1.0.1 packages the existing 115 instruction workflows. It installs no MCP
 server, lifecycle hook, executable runtime, model, external service, or credential.
 Some workflows require Botte Secrète or tools such as Java/OculiX, rtk, fallow,
 ComfyUI, Ollama, LM Studio or LocalAI. Read the selected skill's prerequisites;
@@ -19,9 +19,9 @@ codex plugin list --marketplace frugal-skills-marketplace --json
 ```
 
 To pin a release, supply its published commit SHA or tag through `--ref` instead
-of `main`. A version in the manifest is not a Git tag. Version 1.0.0 is the first
-plugin package; use the commit containing these manifests until a release tag
-exists.
+of `main`. A version in the manifest is not a Git tag. Version 1.0.0 was the first
+plugin package; 1.0.1 corrects skill-level claims and runtime prerequisites. Use
+the commit containing the chosen version until its release tag exists.
 
 For an upstream release from an unpinned Git source, first confirm that the
 updated `plugin.json` and `.codex-plugin/plugin.json` declare the same **new**
@@ -60,7 +60,7 @@ Confirm that the configured marketplace points to the checkout you are editing.
 For a new distributable release, set a new semantic version in **both** manifests
 before reinstalling. For routine local iteration, preserve the base version and
 replace its existing build suffix with one unique `+codex.<cachebuster>` suffix
-in both manifests, for example `1.0.0+codex.local-20261013-184516`. The UTC timestamp
+in both manifests, for example `1.0.1+codex.local-20261013-184516`. The UTC timestamp
 must change for the next edit; do not append multiple cachebuster suffixes or
 increment the numeric release just to refresh a development cache.
 
@@ -122,7 +122,7 @@ numeric dimensions. The guard rejects missing assets and paths outside the plugi
 python3 scripts/package_plugin.py
 ```
 
-The deterministic ZIP is written to `dist/frugal-skills-1.0.0.zip`. Its single
+The deterministic ZIP is written to `dist/frugal-skills-1.0.1.zip`. Its single
 top-level `frugal-skills/` directory contains the manifests, LICENSE,
 THIRD_PARTY_NOTICES.md, this installation guide, both SVG branding assets, and all
 115 SKILL.md files. It

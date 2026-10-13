@@ -1,6 +1,6 @@
 ---
 name: completion-proof
-description: "Policy A11 detector (docs/local-analysis-policy.md) — finds reports that claim done/complete/termine/fixed without an associated proof (test_id OR cmd_output_ref OR artifact_hash OR a passed validation with a reference). Deterministic, 0 cloud tokens. Every finding carries the five mandatory policy fields. Use before trusting a 'done' report or during checkup."
+description: "Instructions for upstream Policy A11 review of completion claims lacking a referenced test, command output, artifact hash or passed validation. Use before trusting a done/fixed report. Examine the actual evidence; the catalog does not run the detector or prove the claimed result."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -9,7 +9,13 @@ metadata:
 ---
 # completion-proof — anomaly A11 detector
 
-Implements A11 of [[../../docs/local-analysis-policy.md]]: a completion claim
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
+
+The upstream detector is described by A11 of the upstream `docs/local-analysis-policy.md` (not bundled here): a completion claim
 without proof is an anomaly. Proof is one of:
 
 - structured `proof.test_id` / `proof.cmd_output_ref` / `proof.artifact_hash`
@@ -25,5 +31,4 @@ python -m skills.completion_proof.cli .botte --json # compact JSON
 python -m skills.completion_proof.test_completion_proof
 ```
 
-Scans `.json` / `.jsonl` plus report-named `.md/.txt/.html` files. Report-only:
-never fails the build. Pairs with code_complexity (A1) and code_duplication (A6).
+Scans `.json` / `.jsonl` plus report-named `.md/.txt/.html` files. The documented upstream mode is report-only; verify the installed command exit status and CI integration. Pairs with code_complexity (A1) and code_duplication (A6).

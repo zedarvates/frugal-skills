@@ -1,6 +1,6 @@
 ---
 name: code-wrappers
-description: "Policy A3 detector (docs/local-analysis-policy.md) — finds passthrough functions whose body is exactly return f(*args, **kwargs) (or 1:1 argument forwarding) with no transformation, guard, decorator, or distinct docstring. Skips names referenced via getattr/patch. Deterministic, 0 cloud tokens. Every finding carries the five mandatory policy fields. Use before flattening call chains or during checkup. Not for complexity — use code-complexity (A1); not for module-level state or import cycles — use code-state (A2)."
+description: "Instructions for upstream Policy A3 review of unchanged argument-forwarding functions with no distinct transformation, guard, decorator or docstring. Use to plan wrapper review and inspect the five-field evidence; dynamic-name references and non-1:1 signatures are excluded. Not for complexity or module-level state/import cycles."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -9,13 +9,19 @@ metadata:
 ---
 # code-wrappers — anomaly A3 detector
 
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
+
 ## When NOT to use
 
 - The smell is complexity or length rather than pure forwarding —
   use code_complexity.
 - The smell is global state or a circular import — use code_state.
 
-Implements A3 of [[../../docs/local-analysis-policy.md]]: a function is a
+The upstream detector is described by A3 of the upstream `docs/local-analysis-policy.md` (not bundled here): a function is a
 valueless wrapper when it forwards every argument unchanged to another callable
 and adds no docstring, decorator, or transformation.
 
@@ -33,5 +39,5 @@ python -m skills.code_wrappers.cli skills --json # compact JSON
 python -m skills.code_wrappers.test_code_wrappers
 ```
 
-Report-only: never fails the build. Pairs with code_complexity (A1) and
+The documented upstream mode is report-only; verify the installed command exit status and CI integration. Pairs with code_complexity (A1) and
 code_duplication (A6).

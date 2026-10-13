@@ -1,6 +1,6 @@
 ---
 name: harvest
-description: "Build a bounded, read-only manifest of explicitly selected local repositories and dispersed deployments before comparing or migrating fixes."
+description: "Instructions for the upstream workflow: Build a bounded, read-only manifest of explicitly selected local repositories and dispersed deployments before comparing or migrating fixes."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: harvest
 ---
 # Harvest
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 Use `botte harvest <project>...` before removing, updating, or centralizing a
 deployed Botte copy. Scope is explicit: paths passed on the command line and,

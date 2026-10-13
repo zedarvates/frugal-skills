@@ -1,6 +1,6 @@
 ---
 name: demo
-description: "Live ANSI dashboard of the belt's decisions — routing, token savings, micro-NN outputs, escalations, cache hits — either a built-in scripted scenario (no LLM, no network, works on a bare machine) or tailing a real project's event log. Use when the user wants to see/demo what the routing belt is doing, record a README GIF, or watch live decisions while an agent works."
+description: "Instructions for displaying an upstream routing dashboard from a scripted scenario or project event log. The runtime is installed separately, and scripted fixture output is not evidence of live routing or savings."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: demo
 ---
 # demo — watch the belt decide, live
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 Four panels, refreshed as decisions happen: **ROUTING**, **SAVINGS**,
 **MICRO-NN**, **ESCALATIONS**. Reads from [[events]] — same data source as

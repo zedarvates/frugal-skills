@@ -1,6 +1,6 @@
 ---
 name: auto-memory
-description: "Memory as a learnable skill — store, recall, compress, and consolidate agent memories. Inspired by Stanford AutoMem."
+description: "Guidance for upstream memory storage, recall, compression and consolidation, conceptually inspired by Stanford AutoMem. Use to plan a learning-oriented memory workflow; inspect the installed implementation and storage policy before persisting data."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,12 @@ metadata:
   canonical-name: auto_memory
 ---
 # AutoMemory
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
 
 Memory as a capability, not just storage. Adapts to patterns in agent behavior.
 

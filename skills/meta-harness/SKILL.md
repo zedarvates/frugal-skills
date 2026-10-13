@@ -1,6 +1,6 @@
 ---
 name: meta-harness
-description: "Run several skills as one governed pipeline in which every stage executes inside its own sandbox, and nothing is written until an approval gate passes — plan, execute isolated stages, cross-review, then apply with budgets and rollback. Use when the pipeline itself is the object of interest: mechanical isolation between stages, an explicit gate before any write, and a rollback path. Not for the named blue-team pipeline of audit, fix, optimize and consolidate — use mousquetaires; not for a single detector run — use the code detectors directly; not for bounding a retroactive loop and measuring its cost — use loop-optimizer; not for the adversarial challenge alone — use cardinal."
+description: "Instructions for the upstream workflow: Run several skills as one governed pipeline in which every stage executes inside its own sandbox, and nothing is written until an approval gate passes — plan, execute isolated stages, cross-review, then apply with budgets and rollback. Use when the pipeline itself is the object of interest: mechanical isolation between stages, an explicit gate before any write, and a rollback path. Not for the named blue-team pipeline of audit, fix, optimize and consolidate — use mousquetaires; not for a single detector run — use the code detectors directly; not for bounding a retroactive loop and measuring its cost — use loop-optimizer; not for the adversarial challenge alone — use cardinal."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: meta_harness
 ---
 # meta-harness — governed multi-stage orchestration
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 Un meta-harness qui orchestre les skills Botte (audit, fix, counter-audit, optimize, test)
 dans un pipeline gouverné. Chaque étape tourne dans son propre sandbox

@@ -1,6 +1,6 @@
 ---
 name: webhooks
-description: "Minimal HTTP endpoint that exposes the router to no-code workflows — a POST route that takes a prompt and a task type and returns the routing decision as JSON, on a configurable port. Use to let an external workflow system (n8n and similar) call the router without importing Python. Boundary: the listener binds all interfaces and performs no authentication, so it must stay on a trusted local network and is not a public entry point. Not for the routing decision itself — use auto-router; not for a general HTTP surface — see the module registration pattern in code-rules."
+description: "Instructions for the upstream workflow: Minimal HTTP endpoint that exposes the router to no-code workflows — a POST route that takes a prompt and a task type and returns the routing decision as JSON, on a configurable port. Use to let an external workflow system (n8n and similar) call the router without importing Python. Boundary: the listener binds all interfaces and performs no authentication, so it must stay on a trusted local network and is not a public entry point. Not for the routing decision itself — use auto-router; not for a general HTTP surface — see the module registration pattern in code-rules."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: webhooks
 ---
 # webhooks — expose the router to no-code workflows
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 ## Purpose
 

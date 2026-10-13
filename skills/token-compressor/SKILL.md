@@ -1,32 +1,39 @@
 ---
 name: token-compressor
-description: "Compress the token structure itself, not the content — semantic hashing of repeated patterns, byte-pair pruning, repeated-JSON-schema compression and n-gram dedup, backed by a learned n-gram frequency table. Deterministic, pure stdlib, 0 cloud tokens. Use when the same structural patterns repeat across many payloads and the payload shape is the cost driver. Not for the per-turn verbosity policy — use token-shaper; not for content-type compression of logs or tool output — use universal-compressor; not for the agent-to-agent wire format — use agent-compression."
+description: "Instructions for the upstream TokenCompressor reversible TC1 codec: zlib compression of UTF-8 text with base85 encoding. All current level names use the same codec; historical hashing, pruning and schema strategies are not used by compress(). Not for direct model-readable content compaction."
 license: MIT
 metadata:
   version: "1.0.0"
   domain: agent-skills
   canonical-name: token_compressor
 ---
-# token-compressor — compress the structure, not the content
+# token-compressor — reversible upstream text codec
 
-## Purpose
+## Package scope and prerequisites
 
-Reduces the *token structure* of repeated payloads: patterns seen often are
-replaced by hashes, the most frequent byte pairs are pruned, repeated JSON
-schemas are factored, and n-grams are deduplicated using a frequency table
-learned from a corpus.
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+## Current upstream behavior
+
+The current `TokenCompressor.compress()` in `skills.token_compressor.cli` compresses UTF-8 bytes with zlib and base85-encodes them under a `TC1:` prefix. `expand()` decodes that self-contained payload. All accepted level names currently select this same codec; the old semantic hashing, byte-pair pruning, JSON-schema and n-gram transformations are not invoked by `compress()`.
+
+The encoded result requires a compatible decoder. It is not a smaller model-readable prompt, and fewer bytes do not establish fewer model tokens. Encoding overhead can increase the size of small inputs. Verify the round-trip and measured sizes before choosing this transport.
+
+## Conditional upstream example
+
+```python
+from skills.token_compressor.cli import TokenCompressor
+
+codec = TokenCompressor()
+original = 'Keep every value, including whitespace and Unicode.'
+encoded = codec.compress(original)
+assert codec.expand(encoded) == original
+```
+
+Inspect CLI help before using its command output as a payload: the CLI also prints measurement lines, so do not pass the entire mixed stdout to a decoder as though it were only TC1 data.
 
 ## When NOT to use
 
-- The payload is a log, a tool output or code and you want fewer bytes —
-  use universal_compressor (content-type strategies).
-- You need to decide compression level, ratio and output length for a turn —
-  use token_shaper.
-- Two agents exchange messages and you want a binary wire format —
-  use agent_compression.
-
-## Usage
-
-```bash
-python -m skills.token_compressor.cli --help
-```
+- For content a model must read directly, use ordinary text or a verified content-type transform.
+- For per-turn output policy, consider token-shaper.
+- For an inter-agent message contract, consider agent-compression.

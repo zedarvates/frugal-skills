@@ -1,6 +1,6 @@
 ---
 name: events
-description: "Append-only JSONL decision log (.botte/events.jsonl) that every filter in the belt writes to — routing, cache hits, escalations, micro-NN outputs. The single source of truth demo mode, the live dashboard, and session replay all read from. Use when you want to see or emit a live feed of routing/cache/escalation decisions, or when building a tool that needs to watch the belt work in real time."
+description: "Instructions for the upstream workflow: Append-only JSONL decision log (.botte/events.jsonl) that every filter in the belt writes to — routing, cache hits, escalations, micro-NN outputs. The single source of truth demo mode, the live dashboard, and session replay all read from. Use when you want to see or emit a live feed of routing/cache/escalation decisions, or when building a tool that needs to watch the belt work in real time."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: events
 ---
 # events — the unified decision log
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 One append-only file per project, one JSON line per decision. Nothing else in
 the pipeline needs to change what it does — it just also calls `log_event`.
@@ -50,8 +54,7 @@ by default.
 - **Best-effort, never raises.** A logging failure must never break the
   caller — same contract as `control_loop.record`.
 - **Rotation** at 5 MB, keeps the newest half — same spirit as `.botte-cache/`.
-- **0 tokens, 0 network.** Pure stdlib, local file only — consistent with the
-  project's "no telemetry" guarantee: this file never leaves the machine.
+- **Local-file logging design.** Check the installed logger and any export or forwarding configuration. A local file does not itself guarantee that an agent or connected service cannot transmit its content.
 - **Project-scoped** (`.botte/events.jsonl`), unlike `control_loop`'s
   `~/.botte/control-ledger.jsonl` which is machine-wide — events are about
   *this* project's live activity, the ledger is about tuning the router

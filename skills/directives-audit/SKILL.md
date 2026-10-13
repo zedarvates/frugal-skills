@@ -1,6 +1,6 @@
 ---
 name: directives-audit
-description: "Audit a project's AI-agent guidance files — CLAUDE.md, AGENTS.md, .cursorrules, copilot-instructions.md, GEMINI.md, intent docs and specs, in markdown, text or HTML. Use when checking whether a repo has agent instructions, whether they are healthy/consistent, or before an agent starts work on an unfamiliar codebase. Also use when the user mentions CLAUDE.md, AGENTS.md, agent rules, 'does this project have instructions', or stale/oversized directive files."
+description: "Instructions for the upstream workflow: Audit a project's AI-agent guidance files — CLAUDE.md, AGENTS.md, .cursorrules, copilot-instructions.md, GEMINI.md, intent docs and specs, in markdown, text or HTML. Use when checking whether a repo has agent instructions, whether they are healthy/consistent, or before an agent starts work on an unfamiliar codebase. Also use when the user mentions CLAUDE.md, AGENTS.md, agent rules, 'does this project have instructions', or stale/oversized directive files."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: directives_audit
 ---
 # directives-audit — validate AI-agent guidance files
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 Before an agent works on a repo, it should know which directives exist, whether
 they are healthy, and — most importantly — whether they exist at all. Inspired by

@@ -1,6 +1,6 @@
 ---
 name: agent-intel
-description: "The cross-cutting learning layer — record a retroactive loop for distillation, select the skills a task needs (skill RAG), predict the cost of a fix, compress accumulated agent memory, predict the agent route, and distill knowledge across loops, with aggregate stats (loop-distill, skill-rag, predict-fix, mem-compress, predict-route, distill, stats). Use when the question spans several loops or sessions rather than one run. Not for scanning session logs for recurring failures and correcting them — use botte-learn; not for routing one task to local hardware — use local-router; not for choosing among tools — use tool-router."
+description: "Guidance for upstream learning across loops: distillation, skill retrieval, fix-cost and route estimates, memory compression and aggregate statistics. Use for questions spanning runs or sessions. Not for recurring-failure correction (botte-learn), local hardware placement (local-router) or tool selection (tool-router)."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,12 @@ metadata:
   canonical-name: agent_intel
 ---
 # agent-intel — loop distillation, skill RAG, predictive routing
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
 
 ## Purpose
 

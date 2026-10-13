@@ -1,6 +1,6 @@
 ---
 name: preflight
-description: "Make the token-saving optimizations automatic instead of opt-in — a committed project policy plus a UserPromptSubmit hook that injects the prefer-local rules and suggested skills on every prompt, so a fresh prompt (after a component update, or from another dev/agent) never bypasses local routing. Use when the user wants the prefer-local behaviour enforced automatically, consistency across multiple devs/agents, or asks why their prompts aren't using local models by default."
+description: "Instructions for the upstream workflow: Make the token-saving optimizations automatic instead of opt-in — a committed project policy plus a UserPromptSubmit hook that injects the prefer-local rules and suggested skills on every prompt, so a fresh prompt (after a component update, or from another dev/agent) never bypasses local routing. Use when the user wants the prefer-local behaviour enforced automatically, consistency across multiple devs/agents, or asks why their prompts aren't using local models by default."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: preflight
 ---
 # preflight — enforce prefer-local, automatically
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 The gap this closes: the optimizations (local routing, prompt improvement, skill
 search) are **opt-in**, so a fresh prompt — especially after an update or from
@@ -28,7 +32,7 @@ policy.ensure_agents_pointer(project)  # links AGENTS.md/CLAUDE.md to it
 ## 2. Preflight hook (every turn, ~0 cost)
 A `UserPromptSubmit` hook that, before the expensive model sees the prompt,
 injects: the prefer-local rule, the top relevant skills (lexical `find_skills`,
-0 tokens), and an `improve_prompt` nudge for big/ambiguous requests. Crash-proof
+local matching), and an `improve_prompt` nudge for big/ambiguous requests. Best-effort upstream design; verify failure handling
 (a hook must never block you) and fast (no LLM call).
 
 ```bash

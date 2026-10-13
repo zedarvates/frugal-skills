@@ -1,6 +1,6 @@
 ---
 name: tool-router
-description: "Local-first tool routing primitives — tool specifications, a lexical router, a route validator, an evaluation harness with seed cases and a gate that activates a heavier router only when the needle actually beats the local model, plus a token estimator. Use when an agent must choose among many tools without spending cloud tokens on the choice, or when you want to benchmark a router before adopting it. Not for choosing a skill rather than a tool — use skill-finder; not for a model tier decision — use nn-router."
+description: "Instructions for upstream tool specification, lexical routing, route validation and evaluation before adopting a heavier router. The runtime and fixtures are separate; use measured results rather than assuming token savings. Not for skill selection or model-tier choice."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: tool_router
 ---
 # tool-router — choose a tool, locally
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 ## Purpose
 

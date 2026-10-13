@@ -1,49 +1,45 @@
 ---
 name: universal-compressor
-description: "Compress content by type — text, JSON, logs, tool output and code — through dedup, truncation and pattern sampling, with 40 to 90 percent typical savings, reversible in memory or through an explicit bounded store with atomic writes, integrity checks, TTL and size limits; usable as a library, a CLI or an MCP server. Use when a large payload must fit a context window before an agent reads it. Not for the agent-to-agent binary wire format — use agent-compression; not for repeated-structure hashing — use token-compressor; not for deciding the per-turn policy — use token-shaper."
+description: "Instructions for the current upstream content compressor: JSON whitespace minification, exact repeated-line summaries, ANSI removal and code passthrough. Optional restoration retains originals in process memory; durable stores and sampling/truncation are not implemented by this API. Measure bytes and fidelity; not model token savings."
 license: MIT
 metadata:
   version: "1.0.0"
   domain: agent-skills
   canonical-name: universal_compressor
 ---
-# Universal Compressor
+# universal-compressor — conservative upstream content transforms
 
-Headroom-inspired multi-type compression for this toolkit. Reduces token usage by 40-90% depending on content type. Works as library, CLI, or MCP server.
+## Package scope and prerequisites
 
-## Strategies
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
-| Content Type | Strategy | Typical Savings |
-|---|---|---|
-| `text` | Dedup lines, collapse blanks | 0-30% |
-| `json` | Compact + truncate large arrays | 20-60% |
-| `log` | Pattern dedup + sampling | 80-98% |
-| `tool_output` | Head+tail, strip ANSI | 50-90% |
-| `code` | Strip comments, collapse imports | 20-40% |
-| `auto` | Auto-detect content type | Best effort |
+## Current upstream strategies
 
-## Usage
+| Content type | Current transformation |
+|---|---|
+| `text` | Collapse repeated blank lines and summarize exact consecutive repeats |
+| `json` | Remove whitespace outside strings; retain keys, values and number lexemes |
+| `log` | Summarize exact repetition without sampling distinct lines or truncating the tail |
+| `tool_output` | Strip ANSI color codes while retaining all lines |
+| `code` | Keep the source unchanged |
+| `auto` | Choose a type with the installed runtime's detection rules |
+
+These operations do not implement the former sampling, head/tail truncation, comment stripping or import collapsing claims. Inspect the selected strategy and retained data. Summarizing repeats and collapsing blank lines changes text representation; check that the consumer can still answer the task, or keep the original.
+
+## Conditional upstream example
 
 ```python
 from skills.universal_compressor import compress, restore
 
-# Compress with auto-detection
-result = compress(content)
-print(f"{result.original_size} → {result.compressed_size} ({result.ratio:.0%})")
-
-# Compress with type hint + reversibility
-result = compress(big_log, content_type="log", reversible=True)
-
-# Restore original
+result = compress(content, content_type="json", reversible=True)
 original = restore(result.reversible_key)
-
-# Durable restoration is opt-in because originals may contain secrets.
-result = compress(big_log, content_type="log", reversible=True,
-                  reversible_store=".botte-private/compressor", ttl_seconds=3600)
-original = restore(result.reversible_key, store_path=".botte-private/compressor")
+# Compare UTF-8 byte sizes and task fidelity; bytes are not provider token counts.
 ```
 
-Sizes are UTF-8 bytes. Reversible keys are full-content SHA-256 hashes. Durable
-entries use atomic writes, integrity checks, a 1-hour default TTL (maximum 7
-days), and an 8 MiB default size limit. No original is written to disk unless
-`reversible_store` is supplied explicitly.
+`reversible=True` retains the original in an in-process dictionary, indexed by its content hash. `restore(key)` has no `store_path` parameter in this implementation. Restoration requires that same live process and store entry; a restart loses it. The current API does not implement a durable restoration directory, TTL or size limit. Originals may contain sensitive data, so bound their lifetime and use the upstream `flush_store()` when appropriate. Do not claim durable recovery from a hash alone.
+
+## When NOT to use
+
+- For self-contained encoded transport, consider token-compressor and its TC1 decoder.
+- For per-turn verbosity decisions, consider token-shaper.
+- For durable governed memory, use an independently verified storage workflow.

@@ -1,6 +1,6 @@
 ---
 name: efficiency
-description: "Measure tokens, cloud calls, money, latency and local energy per verified task without storing task content."
+description: "Instructions for the upstream workflow: Measure tokens, cloud calls, money, latency and local energy per verified task without storing task content."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: efficiency
 ---
 # Efficiency ledger
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 Use `start_run()` to create a random task identity, `record_usage()` for
 provider-neutral counters, `record_verdict()` after deterministic verification,

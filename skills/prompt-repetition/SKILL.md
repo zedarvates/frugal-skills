@@ -1,6 +1,6 @@
 ---
 name: prompt-repetition
-description: "Policy A8 detector (docs/local-analysis-policy.md) — finds repeated prompts and system contexts (>500 tokens, repeated >=3 times) in event logs (.botte/events.jsonl). Deterministic, pure stdlib, 0 cloud tokens. Every finding carries the five mandatory policy fields (preuve, cout_estime, gain_attendu, risque, refactoring_minimal). Use to identify prefix caching and prompt template factoring opportunities. Not for rewriting a prompt — use prompt-improver; not for measuring the declared always-on prefix — use context-profiler; not for the delta-only transport across loops — use context-windows or prefix-tree."
+description: "Instructions for the upstream repeated-prompt detector: review long recurring prefixes in event logs using its declared policy thresholds. Confirm policy files and evidence fields before running it. Not for prompt rewriting, prefix measurement or delta transport."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: prompt_repetition
 ---
 # prompt-repetition — anomaly A8 detector
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 ## When NOT to use
 
@@ -30,4 +34,4 @@ botte prompts
 python -m skills.prompt_repetition.test_prompt_repetition
 ```
 
-Pure stdlib, 0 cloud tokens, JSON-serialisable.
+The upstream detector describes a JSON-serialisable result; validate it against the installed policy and evidence.

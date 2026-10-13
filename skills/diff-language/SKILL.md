@@ -1,6 +1,6 @@
 ---
 name: diff-language
-description: "A compact, agent-native notation for describing code changes and findings, with severity markers and operation markers in one line, lossless round-trip parsing and serialization, and a reported 47 to 55 percent saving over verbose markdown. Use when emitting fix reports, diffs or audit findings for a model to read. Not for compacting structured report JSON — use ultra-compact; not for reducing free text — use universal-compressor."
+description: "Instructions for a compact notation for code changes and findings with severity and operation markers. Verify the installed parser and round-trip behavior before using it as a report format. Not for JSON report compaction or general content compression."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: diff_language
 ---
 # Diff Language
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 ## When NOT to use
 
@@ -23,5 +27,5 @@ Compact agent-native diff format for token-efficient code change descriptions.
 
 **Module:** `skills/diff_language`
 
-**Savings:** 47-55% vs verbose markdown
+**Measurement:** compare actual encoded sizes and verify the installed parser round-trip; no fixed reduction is established here.
 **Roundtrip:** lossless parse + serialize

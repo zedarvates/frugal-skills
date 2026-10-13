@@ -1,6 +1,6 @@
 ---
 name: cardinal
-description: "Adversarial red team that challenges the blue team's output — a counter-auditor, a counter-developer and a counter-optimizer run in parallel and an orchestrator issues the verdict, used after the blue team pipeline on critical code or when health is low. Use to attack a result before trusting it. Not for producing the first audit, fixes or optimizations — use mousquetaires; not for the mechanical review of one diff — use simplify-code."
+description: "Instructions for an upstream adversarial review workflow with counter-auditor, counter-developer, counter-optimizer and verdict orchestration. Use to challenge an existing result on critical work. Not for producing the first audit or fixes (mousquetaires), or mechanically reviewing one diff (simplify-code)."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,12 @@ metadata:
   canonical-name: cardinal
 ---
 # Les Mousquetaires du Cardinal — Red Team
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
 
 ## When NOT to use
 
@@ -27,4 +33,4 @@ Adversarial agents that challenge the Blue Team's work.
 **Workflow:** `rochefort ∥ milady ∥ comte_de_wardes → cardinal`
 
 **Module:** `skills/cardinal`
-**Pre-prompts:** `skills/cardinal/prompts/` + `skills/core-agent.md`
+**Upstream pre-prompts:** `skills/cardinal/prompts/` + `skills/core-agent.md`; these resources are not bundled in this catalog. Obtain and review a compatible upstream version before attempting the named pipeline.

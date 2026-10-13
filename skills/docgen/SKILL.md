@@ -1,6 +1,6 @@
 ---
 name: docgen
-description: "Generate documentation with a local model drafting and the cloud only refining (0 cloud tokens for the draft), plus a local session review that summarises what a work session did. Use to write README/module docs/CHANGELOG/guides/ADRs cheaply, or to produce end-of-session notes/learnings from a transcript."
+description: "Instructions for drafting documentation or session notes with separately configured model backends. Confirm the selected local and cloud endpoints, data handling and costs before invocation. Use for documentation and session summaries; not for prompt-prefix analysis."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: docgen
 ---
 # docgen — local-drafted docs (cloud-refined) + session review
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 Documentation is verbose, so the LOCAL model writes the first draft and the cloud
 model is spent only on a final polish — the video's "pre-write local, correct
@@ -22,9 +26,9 @@ python -m skills.docgen.cli session "user: did X\nassistant: built Y" --text
 
 - **draft** — local model drafts (`readme|module|changelog|guide|adr`); cloud
   refines **only if a key is set** (otherwise you keep the local draft, marked
-  un-refined). 0 cloud tokens for the draft itself.
+  un-refined). Verify backend choice, configured forwarding and provider usage.
 - **session** — reads a transcript (Claude Code `.jsonl`, markdown, or raw text)
-  and a LOCAL model returns `done / decisions / learnings / next`. 0 cloud tokens.
+  and a configured model may return `done / decisions / learnings / next`. Measure the actual call.
 
 Exposed via [[llm-mcp]] as `draft_doc` and `session_review`. Pairs with
 [[ingest]] (pull sources to document) and [[checkup]] (what changed this session).
