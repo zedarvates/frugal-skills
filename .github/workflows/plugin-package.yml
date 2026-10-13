@@ -1,0 +1,27 @@
+name: Plugin package
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check ingestion rejection cases
+        run: python3 -m unittest discover -s tests
+      - name: Validate and build the skills-only plugin
+        run: python3 scripts/package_plugin.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: frugal-skills-plugin
+          path: dist/frugal-skills-*.zip
+          if-no-files-found: error
