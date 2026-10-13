@@ -109,7 +109,7 @@ class PluginIngestionTests(unittest.TestCase):
     def test_archive_includes_both_referenced_assets(self):
         result = self.run_package(check=False)
         self.assertEqual(result.returncode, 0, result.stderr)
-        with zipfile.ZipFile(self.root / "dist/frugal-skills-1.0.0.zip") as archive:
+        with zipfile.ZipFile(self.root / "dist" / f"frugal-skills-{self.manifest['version']}.zip") as archive:
             self.assertIsNone(archive.testzip())
             self.assertEqual(len(archive.namelist()), 122)
             for field in ("logo", "composerIcon"):

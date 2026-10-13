@@ -1,6 +1,6 @@
 ---
 name: skill-project-optimizer
-description: "Build a standing per-project skill profile — scan the available skills, profile what a given project actually needs, and emit a .skills-profile splitting skills into always, conditional and disabled, for a reported 73 to 83 percent reduction of the skill-shaped token cost. Deterministic and local, 0 cloud tokens. Use when starting work on a new project, or when the token cost of the loaded skill set is too high and the fix is a project-level decision. Not for picking skills for one specific query — use skill-finder; not for measuring the whole always-on prefix — use context-profiler; not for choosing a subset under an explicit budget — use context-budget."
+description: "Instructions for producing an upstream project skill profile with always, conditional and disabled entries. Measure project needs and context use before changing it; no fixed savings are established here. Not for one-query ranking, global prefix measurement or budget allocation."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: skill_project_optimizer
 ---
 # Skill Project Optimizer
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 Per-project skill filtering to reduce token waste.
 
@@ -29,4 +33,4 @@ python3 -m skills.skill_project_optimizer.cli compare <project>
 
 **Module:** `skills/skill_project_optimizer`
 **Output:** `.skills-profile` (always/conditional/disabled skills)
-**Savings:** 73-83% token reduction
+**Measurement:** compare loaded context and task quality with the original profile; this catalog supplies no fixed reduction.

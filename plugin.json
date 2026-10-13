@@ -1,11 +1,18 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "frugal-skills",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Instruction workflows for context budgets, routing and code review. Executable implementations remain upstream.",
-  "author": { "name": "Zedarvates" },
+  "author": {
+    "name": "Zedarvates"
+  },
   "homepage": "https://github.com/zedarvates/frugal-skills",
   "repository": "https://github.com/zedarvates/frugal-skills",
   "license": "MIT",
-  "keywords": ["skills", "context", "routing", "local-first"]
+  "keywords": [
+    "skills",
+    "context",
+    "routing",
+    "local-first"
+  ]
 }

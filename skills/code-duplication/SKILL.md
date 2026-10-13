@@ -1,6 +1,6 @@
 ---
 name: code-duplication
-description: "Policy A6 detector (docs/local-analysis-policy.md) — finds duplicated function bodies and near-duplicate functions across a tree, exactly and semantically (same AST shape with renamed identifiers, via --semantic), through normalized AST hashing with formatting and comments ignored and a minimum of 6 statements. Deterministic, pure stdlib, 0 cloud tokens. Every finding carries the five mandatory policy fields (preuve, cout_estime, gain_attendu, risque, refactoring_minimal). Use before refactors or during checkup, and to prevent the same capability being implemented twice. Not for complexity or length — use code-complexity (A1); not for duplicate descriptions across skills — that is the catalog-level check, see skill-finder."
+description: "Instructions for upstream Policy A6 analysis of duplicated Python bodies using normalized AST hashes and an optional semantic mode; the documented minimum is six statements. Use to plan duplication review and examine five-field findings. Not for complexity (code-complexity) or skill-description overlap (skill-finder); verify equivalence before merging code."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -9,14 +9,20 @@ metadata:
 ---
 # code-duplication — anomaly A6 detector (exact + semantic)
 
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
+
 ## When NOT to use
 
 - The problem is a function that is too complex or too long — use code_complexity.
 - The duplication is between two skill descriptions rather than two code
   bodies — the catalog-level overlap check belongs with skill_finder.
 
-Implements both halves of A6 of
-[[../../docs/local-analysis-policy.md]]: two function bodies are duplicates
+The upstream detector describes both halves of A6 of
+the upstream `docs/local-analysis-policy.md` (not bundled here): two function bodies are duplicates
 when their statement sequences produce identical hashes (comments and
 formatting ignored; function names irrelevant — the exact half), or when
 their AST shape is identical after identifier normalization (same operators,
@@ -35,5 +41,5 @@ Semantic findings are reported separately (`dup_semantique`) and never
 duplicate an exact group. Because two similar bodies can differ
 intentionally, the policy requires a line-by-line equivalence diff before any
 merge; findings carry that caveat in `risque` and `refactoring_minimal`.
-Report-only: never fails the build. Pairs with code_complexity (A1) which
+The documented upstream mode is report-only; verify the installed command exit status and CI integration. Pairs with code_complexity (A1) which
 shares the five-field finding shape.

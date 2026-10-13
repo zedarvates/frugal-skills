@@ -1,6 +1,6 @@
 ---
 name: botte-learn
-description: "Analyse recorded sessions for recurring failure patterns and turn them into correction rules that can be applied back, with a status view (scan, apply, status). Use when the same mistake keeps coming back and you want a learned, repeatable correction rather than another one-off fix. Not for distilling a whole loop into reusable knowledge — use agent-intel (loop-distill); not for detecting structural code smells — use the code_* detectors; not for governed long-term memory — use memory-hub."
+description: "Guidance for upstream recorded-session analysis and proposed correction rules (scan, apply, status). Use to investigate recurring failure patterns; validate each proposed rule before applying it. Not for loop distillation (agent-intel), structural code detection or governed long-term memory (memory-hub)."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -9,11 +9,16 @@ metadata:
 ---
 # botte-learn — from repeated failures to correction rules
 
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
+
 ## Purpose
 
 Scans session logs, extracts observed failure patterns, and proposes learned
-rules that can then be applied, so a recurring error is fixed once as a rule
-instead of once per occurrence.
+rules for review and possible application. A proposed rule is not proof that the recurring error is fixed; validate its effect against observed cases.
 
     python -m skills.botte_learn.cli scan
     python -m skills.botte_learn.cli apply

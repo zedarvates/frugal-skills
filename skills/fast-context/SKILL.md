@@ -1,6 +1,6 @@
 ---
 name: fast-context
-description: "Deterministic repository exploration that separates context gathering from reasoning — turn an exploration request into targeted READ, GLOB and GREP operations and return a compact file:line:score report, so a large share of read and search calls are served by local stdio operations in milliseconds for 0 tokens instead of by an LLM. Fully deterministic, stdlib only, no model and no GPU. Use when the agent needs to understand a codebase, find patterns, locate imports, or gather context without spending an LLM call. Not for choosing which skills to load under a budget — use context-budget; not for measuring the always-on prefix — use context-profiler."
+description: "Instructions for upstream repository exploration using targeted read, glob and search operations with a compact file-and-line report. Confirm the runtime before invoking its commands and measure latency and host model usage. Not for choosing skills or profiling the always-on prefix."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -9,12 +9,14 @@ metadata:
 ---
 # FastContext Agent — exploration repo
 
-Un sous-agent d'exploration déterministe qui sépare la **collecte de contexte**
-du **raisonnement**. Au lieu de laisser l'agent principal dépenser 56% de ses
-tokens en READ/GLOB/GREP, FastContext gère ça en **~5ms, 0 token**.
+## Package scope and prerequisites
 
-Inspiré par **Microsoft FastContext-1.0-4B-SFT** mais 100% déterministe
-(stdlib Python, pas de LLM, pas de GPU).
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Un sous-agent d'exploration déterministe qui sépare la **collecte de contexte**
+du **raisonnement**. Les recherches locales peuvent réduire le contexte à fournir, mais leurs coûts et leur latence doivent être mesurés avec le runtime installé.
+
+L'approche upstream est inspirée par Microsoft FastContext et utilise des recherches locales. Ce catalogue ne fournit ni son modèle ni son runtime.
 
 ## Usage
 
@@ -94,17 +96,9 @@ FastContext Agent
   └─────────────────────────────────┘
 ```
 
-## Économie tokens estimée
+## Mesures
 
-| Type requête | Avant (LLM) | Après (FastContext) | Économie |
-|-------------|-------------|-------------------|----------|
-| Imports | ~800 tokens | 0 token | -100% |
-| Comprendre fonction | ~1200 tokens | 0 token | -100% |
-| Trouver tests | ~400 tokens | 0 token | -100% |
-| Pattern search | ~600 tokens | 0 token | -100% |
-| Audit sécurité | ~2000 tokens | 0 token | -100% |
-
-**~5000 tokens/session** économisés (estimé sur 5 explorations par session).
+Comparer le contexte retourné, la qualité de recherche, la latence et la consommation réelle de l'agent. Aucun benchmark de gains n'est fourni dans ce catalogue.
 
 ## Pitfalls
 
@@ -114,6 +108,6 @@ FastContext Agent
 2. **Cache TTL** — Le cache LRU évite de rescanner 30 fois le même fichier dans
    la même session. TTL par défaut: 30s. Passer `--no-cache` pour forcer.
 3. **Gros repos** — Pour les repos >1000 fichiers, `fast_grep` utilise
-   `subprocess.run("grep -rl ...")` plutôt qu'un glob Python (10x plus rapide).
+   `subprocess.run("grep -rl ...")` plutôt qu'un glob Python (mesurer les performances sur le dépôt concerné).
 4. **Binaire/symlinks** — Skip automatiquement les fichiers binaires, .git/,
    node_modules/, __pycache__/, .venv/.

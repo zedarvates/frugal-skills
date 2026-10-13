@@ -1,27 +1,34 @@
 ---
 name: media-loader
-description: "Extract text from media before any model sees it — video keyframes through the local vision accelerator, audio through local speech to text, image detection/classification/OCR, and PDF or scanned document OCR — so the model receives a text summary instead of raw bytes, for a reported 90 to 99 percent saving on media-heavy tasks. Use whenever a task involves video, audio, image or scanned document input. Raw media is never sent to a model: this module is that extraction step. Not for generating images — use the local image endpoint through local-router; not for choosing which local endpoint exists — use local-router."
+description: "Instructions for assessing the upstream media-loader prototype. Its current video, audio, image and PDF paths include simulated or placeholder extraction results, not a working media pipeline. Use to plan and verify real adapters; never present placeholder text or detections as extracted evidence."
 license: MIT
 metadata:
   version: "1.0.0"
   domain: agent-skills
   canonical-name: media_loader
 ---
-# media-loader — never send raw media to a model
+# media-loader — prototype adapter planning
 
-## Purpose
+## Package scope and prerequisites
 
-Step 1 is local extraction, step 2 is the model reading text. Video becomes a
-keyframe summary, audio becomes a transcript, images become structured JSON,
-documents become text.
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
-    Video  -> local keyframe extraction + classification -> text summary
-    Audio  -> local speech to text -> transcript
-    Image  -> local detect / classify / OCR -> structured JSON
-    PDF    -> local OCR -> text
+## Current upstream limitations
+
+The inspected upstream `skills.media_loader` implementation contains simulated video-frame metadata, placeholder speech transcripts, mock image detections/OCR and PDF text placeholders. These outputs are scaffolding, not evidence extracted from a user's media. Installing the runtime or naming a Hailo/local service does not by itself connect working extraction adapters.
+
+Use this skill to plan and validate a real extraction integration. Report that the prototype is incomplete before any requested extraction. Do not present a placeholder transcript, frame classification, detection or OCR string as a measured result. If no verified adapter is available, use a separately available extraction tool within the task scope or explain the missing prerequisite.
+
+## Adapter verification
+
+1. Inspect the installed implementation and identify the actual video, audio, image or PDF adapter.
+2. Confirm supported formats, models, hardware and service endpoints; determine whether media is sent to a local or remote model.
+3. Run a known fixture through the real adapter and compare its result with expected evidence.
+4. Preserve provenance, failures and uncertainty in any extracted text summary.
+5. Measure input sizes, quality and actual model usage. This catalog establishes no reduction percentage or guarantee that raw media avoids every model.
 
 ## When NOT to use
 
-- You want an image produced, not read — use local_router's image endpoint.
-- You want to know which local capability is available — use local_router.
-- The input is already text — no extraction is needed.
+- For generating media, use an available generation workflow.
+- For an existing verified media-extraction tool, use that tool directly rather than the prototype's placeholders.
+- For plain text input, no media adapter is needed.

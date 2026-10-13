@@ -1,6 +1,6 @@
 ---
 name: vision-budget
-description: "Deterministic preflight for local full-frame versus ROI visual-token budgets, evidence coverage, verifier fallback, privacy, and cache separation."
+description: "Instructions for the upstream workflow: Deterministic preflight for local full-frame versus ROI visual-token budgets, evidence coverage, verifier fallback, privacy, and cache separation."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: vision_budget
 ---
 # vision-budget — local ROI planning preflight
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 Use this skill to estimate whether a coarse-to-fine local vision pipeline is
 worth a real VLM benchmark. It is pure stdlib and does not run a vision model.
@@ -64,8 +68,7 @@ from runtime routing and always carries `activation_authority=false`.
 five deterministic UI/OCR screens: status badge, invoice total, dialog action,
 table row, and detector-miss alert. Corpus metadata stores only task classes,
 dimensions, digests, and region counts; labels and raster payloads remain local.
-The measured CPU probe preserved 15/15 quality and saved 41.32% input tokens,
-but failed the p95 latency gate and therefore did not activate routing.
+This catalog contains no measured UI/OCR results. Run the compatible upstream probe, retain its quality and latency evidence, and keep routing inactive until the declared gates pass.
 
 `timing_benchmark` keeps that same corpus and schema but streams the response to
 separate PNG/base64/request preprocessing, TTFT/prefill, and decode. It writes
@@ -98,9 +101,4 @@ bounded model metadata. The screen blocks only that exact pair. A different
 runtime or model identity does not inherit the failure. Raw errors and command
 lines are excluded; malformed evidence fails closed.
 
-The 2026-08-08 smoke follow-up rejected `ternary-bonsai-27b` before inference:
-the selected LM Studio runtime returned `load-error` while loading its `dspark`
-GGUF. Estimate-only eligibility and a `vision=true` inventory flag therefore do
-not establish runtime loadability. That failure is now applied only to CPU on
-`llama.cpp-win-x86_64-nvidia-cuda12-avx2@2.27.1`. No UI/OCR matrix or routing
-change followed.
+A model inventory flag and estimate-only eligibility do not establish runtime loadability. Record an actually observed load failure with its exact model/runtime identity before applying a block.

@@ -1,6 +1,6 @@
 ---
 name: report
-description: "Persist any audit as a timestamped Markdown and/or HTML file (name + date + time) under .botte/reports/, browsable at any time, and list saved reports. Use when the user wants audits saved to consultable files, a history of audits, or to export a checkup/metrics/infra report as .md or .html."
+description: "Instructions for the upstream workflow: Persist any audit as a timestamped Markdown and/or HTML file (name + date + time) under .botte/reports/, browsable at any time, and list saved reports. Use when the user wants audits saved to consultable files, a history of audits, or to export a checkup/metrics/infra report as .md or .html."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: report
 ---
 # report — audits saved as timestamped, consultable files
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 Audits print to the console; this keeps them. Any report dict → a self-contained
 `<name>_<YYYY-MM-DD_HHMMSS>.md` and/or `.html` under `.botte/reports/`.

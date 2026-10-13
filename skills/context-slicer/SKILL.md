@@ -1,6 +1,6 @@
 ---
 name: context-slicer
-description: "Split one body of context into independent typed slices (code, doc, config, log, result, meta) by markdown headings and section markers, each with a token count, a priority and the task types it serves, then select only the slices relevant to a task type. Deterministic, 0 cloud tokens. Use when the same context must serve several agents or task types without every one loading everything. Not for choosing a subset under an explicit token budget — use context-budget; not for removing sections nobody uses — use prefix-pruner."
+description: "Instructions for upstream typed context slicing by headings and markers, with token estimates, priorities and task-type selection. Use to plan how several agents can consume relevant portions of shared context. Not for explicit-budget selection (context-budget) or permanently pruning unused sections (prefix-pruner)."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,12 @@ metadata:
   canonical-name: context_slicer
 ---
 # context-slicer — typed slices, loaded on demand
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
 
 ## Purpose
 

@@ -113,7 +113,7 @@ This catalog is published, and still being completed.
   THIRD_PARTY_NOTICES.md.
 - **Language:** English. A few skills still carry French sections from their
   origin; they are usable as they stand and are being translated.
-- **Plugin version:** 1.0.0, the first Codex plugin package of this catalog.
+- **Plugin version:** 1.0.1, correcting instruction claims and execution prerequisites after the initial 1.0.0 package.
 - **Validation:** package checks run in this repository. Runtime checks remain
   upstream; they are not implied by a successful instructions-only installation.
 

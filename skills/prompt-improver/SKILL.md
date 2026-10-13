@@ -1,6 +1,6 @@
 ---
 name: prompt-improver
-description: "Rewrite a rough prompt into a professional, structured prompt (role, context, task, instructions, constraints, output format, success criteria) using a LOCAL model — 0 cloud tokens — with markdown or strict JSON prompt output. Use when the user wants to improve/boost/structure a prompt, mentions '/p-amelioration', 'prompt pro', 'JSON prompt', prompt engineering, or wants a reusable prompt template built locally. Not for finding repeated prefixes that waste tokens in the logs — use prompt-repetition; not for choosing which skill to run — use skill-finder."
+description: "Instructions for structuring a prompt as role, context, task, instructions, constraints, output format and success criteria. A local-model execution requires a configured backend; an agent-authored template is not an upstream execution. Not for repeated-prefix detection or skill selection."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: prompt_improver
 ---
 # prompt-improver — pro structured prompts, built locally
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 ## When NOT to use
 
@@ -18,7 +22,7 @@ metadata:
   use context_profiler.
 
 Improving a prompt is text transformation, not hard reasoning — so it runs on a
-**local model for 0 cloud tokens** (`llm_backends`). Output as structured markdown
+**separately configured model backend** (`llm_backends`). Output as structured markdown
 or a strict **JSON prompt object**.
 
 ## Run it (the /p-amelioration entry point)

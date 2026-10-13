@@ -1,6 +1,6 @@
 ---
 name: botte-proxy
-description: "Transparent LLM compression proxy for this toolkit — sit between any AI agent and its LLM API to compress requests by 40-95%. Use when you want token savings without changing agent code."
+description: "Instructions for the upstream HTTP compression proxy between an agent and its configured LLM endpoint. Use to plan proxy integration and inspect compression behavior. Runtime and target endpoints are separate prerequisites; remote or cloud targets receive forwarded data, and savings require measurement."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -9,16 +9,22 @@ metadata:
 ---
 # Botte Proxy
 
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
+
 Transparent HTTP proxy that compresses LLM API requests before forwarding them. Inspired by Headroom's proxy mode.
 
 ## Features
 
 - **Transparent** — sits between any OpenAI-compatible agent and its LLM API
 - **Universal compression** — uses Universal Compressor's smart routing (JSON, code, logs, tool output)
-- **Reversible** — originals are cached for retrieval on demand (CCR-like)
+- **No proxy restoration** — the current proxy calls compression with `reversible=False` and exposes no restore route. The universal-compressor's separate in-process restoration API is not a proxy recovery guarantee.
 - **Dashboard** — real-time savings dashboard at `http://localhost:PORT/dashboard`
 - **Stats API** — JSON stats at `http://localhost:PORT/stats`
-- **Local-first** — your data never leaves your machine
+- **Destination-dependent privacy** — a loopback target keeps forwarding on this machine; a remote target sends requests to that host, and a cloud target sends them to the provider. Inspect the configured target and its data-handling policy before sending content.
 
 ## Usage
 

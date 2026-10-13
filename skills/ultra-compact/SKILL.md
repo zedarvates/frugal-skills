@@ -1,6 +1,6 @@
 ---
 name: ultra-compact
-description: "Compact JSON report wire format for agent-facing reports — three levels: single-char keys (about -30 percent versus compact JSON), keyless array format, and delta-only patches for iterative reports (about -90 percent), plus a size comparison helper. Use when emitting audit, checkup or telemetry JSON that an agent or a local model will read back. Not for logs, free text or code — use universal-compressor; not for the agent-to-agent wire format — use agent-compression."
+description: "Instructions for upstream compact JSON report formats: short keys, arrays and deltas. Use only with a compatible decoder and retained baseline, and verify round-trip data and measured size. Not for prose compression or binary inter-agent transport."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,14 +8,20 @@ metadata:
   canonical-name: ultra_compact
 ---
 # Ultra-Compact JSON (P12)
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 Three compression levels: single-char keys, array format, delta-only.
 
-**Trigger:** When generating JSON reports — always use the most compact format.
+**Trigger:** When the consumer supports the chosen format and the original data can be reconstructed. Prefer normal JSON when compatibility or a baseline is unavailable.
 
 **Levels:**
-1. Single-char keys: -30% vs standard compact
-2. Array format (no keys): -38% vs compact
-3. Delta-only (send changes): -90% for iterative reports
+1. Single-character keys with a shared field map.
+2. Array format with an agreed field order.
+3. Delta-only updates with an available baseline.
+
+Compare actual sizes and verify round-trip data; these forms do not guarantee smaller model-token usage.
 
 **Module:** `skills/ultra_compact`
 **Functions:** to_ultra(), to_array(), delta_only(), compare_sizes()

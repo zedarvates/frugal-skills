@@ -1,6 +1,6 @@
 ---
 name: single-impl
-description: "Policy A4 detector (docs/local-analysis-policy.md) — finds ABC, Protocol, and abstract base classes with exactly one concrete implementation across the repository. Pure stdlib AST, 0 cloud tokens. Every finding carries the five mandatory policy fields. Use to identify over-abstraction and unnecessary layer indirections."
+description: "Instructions for the upstream single-implementation abstraction detector. Confirm the compatible runtime and analysis policy; review ABC, Protocol and abstract-base findings as candidates, with evidence, rather than automatic refactoring authority."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: single_impl
 ---
 # single-impl — anomaly A4 detector
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 Implements A4 of [[../../docs/local-analysis-policy.md]]:
 
@@ -22,4 +26,4 @@ botte interfaces
 python -m skills.single_impl.test_single_impl
 ```
 
-Pure stdlib, 0 cloud tokens, JSON-serialisable.
+The upstream detector describes a JSON-serialisable result; validate it against the installed policy and evidence.

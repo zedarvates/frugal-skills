@@ -1,6 +1,6 @@
 ---
 name: context-compressor
-description: "Compress a large log file before an agent reads it — collapse numeric, timestamp and UUID noise into patterns, count repetitions, keep the top patterns and a sample of unique lines, with a reported 80 percent reduction on log-analysis tasks. CONSOLIDATION PENDING: this overlaps the log strategy of universal-compressor (content_type log, 80 to 98 percent), which is the supported path for new work; this module is kept for existing callers only. Use when a log has to be reduced to its patterns and samples and universal-compressor is not available in the call site. Not for text, JSON, code or tool output — use universal-compressor; not for the token-structure level — use token-compressor."
+description: "Instructions for the legacy upstream log-pattern compressor: repetitions, common patterns and sampled distinct lines. Use only for existing callers while consolidation is pending; universal-compressor with log content is the suggested path for new work. No measured reduction is established by this catalog."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,12 @@ metadata:
   canonical-name: context_compressor
 ---
 # context-compressor — log pattern reduction (consolidation pending)
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
 
 ## Purpose
 
@@ -20,8 +26,7 @@ distinct lines.
 ## Status
 
 This is a narrow, single-file module whose only strategy — log pattern dedup —
-already exists in universal_compressor under content_type "log", with a larger
-reported saving and a reversible mode. The declared direction is consolidation
+is also described by universal_compressor under content_type "log", including an optional reversible mode. Verify the installed implementation and any claimed reduction with representative input. The declared direction is consolidation
 into universal_compressor; until that happens, this entry exists so the module
 is routable rather than invisible.
 

@@ -1,6 +1,6 @@
 ---
 name: metrics
-description: "Cost-focused project metrics, broken down per component — LOC by language and component, duplicate-function groups, directive health, always-on context cost (CLAUDE.md tokens × turns), local-routing posture, skill-search tokens avoided, and the audit's own (near-zero) cost. Use when the user wants to quantify a project's token/cost profile, see LOC/health per component, or measure what the toolkit saves."
+description: "Instructions for collecting component-level project metrics and separating estimated context costs from measured provider usage. Use to report LOC, duplicate groups, directive health and routing observations with their scope and evidence; do not infer savings from missing counters."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: metrics
 ---
 # metrics — quantify a project's token/cost profile
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 Surfaces the numbers an audit should give you, framed around cost. A multi-stack
 project (website + game server + client + tools) has **no single number**, so
@@ -18,24 +22,15 @@ python -m skills.metrics.cli <project>
 python -m skills.metrics.cli <project> --porthos reports/<proj>/audit-report.json --json
 ```
 
-## What it reports
+## What to report
 
-- **LOC** by language and by top-level **component** (with bars).
-- **Duplicate-function groups** (stdlib AST, free).
-- **Directive health** + **always-on context cost**: instruction tokens × turns
-  — e.g. a 2.3k-token CLAUDE.md ≈ **70k tokens/session** just re-sending rules.
-- **Local-routing posture**: backends present → cheap work at 0 cloud tokens.
-- **Skill-search tokens avoided** by `find_skills` (catalog × ~150 tok).
-- **The audit's own cost**: `analysis_llm_tokens = 0` — the scans are
-  deterministic Python; only synthesis by the orchestrating model costs tokens.
-- **Deep audit** summary (health / dead code / secrets) if a Porthos
-  `audit-report.json` is reachable (`.botte/` or `--porthos`).
+- LOC and duplicate-function candidates, grouped by component.
+- Declared instruction sizes and estimated resend costs with tokenizer and turn assumptions.
+- Observed backend and routing configuration, not assumed savings.
+- Runtime counters with their scope and provenance; they are not a measurement of total host usage.
+- Deep-audit summaries only when the underlying report is available and verified.
 
-## Why this framing
-
-The headline an audit should produce: *"analysis cost 0 tokens; your always-on
-instructions cost ~70k/session; local routing can move cheap work to 0 cloud
-tokens."* That's the number that justifies the toolkit.
+State which values are measured, estimated, or unavailable. Do not fill missing counters with zero or justify an optimization using an invented baseline.
 
 Exposed via [[llm-mcp]] as the `metrics` tool. Related: [[infra-advisor]]
 (auto audit), [[directives-audit]], [[skill-finder]], [[bootstrap]].

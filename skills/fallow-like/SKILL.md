@@ -1,6 +1,6 @@
 ---
 name: fallow-like
-description: "A bundle of nine local static analyzers — dead code, duplication, complexity, secrets, taint and data-flow security, boundaries, feature flags, hot paths and blast radius — with a health score and grade and compact JSON, SARIF or markdown output. Use for the broad, one-pass view of a codebase. Not for the five-field policy findings of A1, A2, A3 and A6 — use code-complexity, code-duplication, code-state and code-wrappers; not for the JS/TS external analyser — use fallow."
+description: "Instructions for the upstream workflow: A bundle of nine local static analyzers — dead code, duplication, complexity, secrets, taint and data-flow security, boundaries, feature flags, hot paths and blast radius — with a health score and grade and compact JSON, SARIF or markdown output. Use for the broad, one-pass view of a codebase. Not for the five-field policy findings of A1, A2, A3 and A6 — use code-complexity, code-duplication, code-state and code-wrappers; not for the JS/TS external analyser — use fallow."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: fallow_like
 ---
 # Fallow-Like Static Analyzers
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 ## When NOT to use
 
@@ -31,13 +35,13 @@ metadata:
 
 Inspired by RepoAudit/DeepAudit, in botte's local-first shape:
 
-- **symbolic (0 tokens)** — Python `ast` traces attacker-controlled *sources*
+- **symbolic analysis** — Python `ast` traces attacker-controlled *sources*
   (`sys.argv`, `os.environ`/`getenv`, `input`, framework `request.*`) into
   dangerous *sinks* (`subprocess`/`os.system`/`eval`/`exec`, SQL `execute`,
   `pickle`/`yaml.load`/`marshal`, `urlopen`/`requests`) and flags
   insecure-by-default calls (`shell=True` + dynamic, `yaml.load` without a safe
   Loader). Each finding is **CWE-tagged** (78/89/94/502/918). No compilation.
-- **neuro (0 cloud tokens, optional)** — `--judge` asks a LOCAL model to confirm
+- **optional model-assisted analysis** — `--judge` asks a LOCAL model to confirm
   each candidate (exploitable vs sanitized); it only annotates/adjusts confidence.
 
 ```bash

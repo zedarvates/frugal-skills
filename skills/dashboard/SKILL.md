@@ -1,6 +1,6 @@
 ---
 name: dashboard
-description: "Generate one self-contained, timestamped HTML dashboard of the system's cost picture — routing savings (control loop), metric trends, current metrics, and the cost of outstanding fixes. Also renders as a live ANSI terminal view (--tui, --watch) and serves a live HTTP API (api.py). Use when the user wants a single visual view of cost/savings/health over time, or a live terminal view they don't have to open a browser for."
+description: "Instructions for the upstream workflow: Generate one self-contained, timestamped HTML dashboard of the system's cost picture — routing savings (control loop), metric trends, current metrics, and the cost of outstanding fixes. Also renders as a live ANSI terminal view (--tui, --watch) and serves a live HTTP API (api.py). Use when the user wants a single visual view of cost/savings/health over time, or a live terminal view they don't have to open a browser for."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: dashboard
 ---
 # Dashboard Skill
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 Live metrics visualization for this toolkit — one data source, three views
 (timestamped HTML report, ANSI TUI, live HTTP API).

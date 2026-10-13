@@ -1,6 +1,6 @@
 ---
 name: mousquetaires
-description: "The blue team pipeline — audit, fix, optimize, consolidate — with an auditor agent, a developer agent, an optimizer agent and an orchestrator, exposed as a CLI over a project. Use when the user wants a code audit, automated fixes or token optimization across a project. Not for challenging an existing result — use cardinal; not for the five-field policy findings alone — use the code_* detectors."
+description: "Instructions for the upstream workflow: The blue team pipeline — audit, fix, optimize, consolidate — with an auditor agent, a developer agent, an optimizer agent and an orchestrator, exposed as a CLI over a project. Use when the user wants a code audit, automated fixes or token optimization across a project. Not for challenging an existing result — use cardinal; not for the five-field policy findings alone — use the code_* detectors."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,10 @@ metadata:
   canonical-name: mousquetaires
 ---
 # Les Quatre Mousquetaires — Blue Team
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
 
 ## When NOT to use
 

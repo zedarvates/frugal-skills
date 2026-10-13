@@ -1,6 +1,6 @@
 ---
 name: botte-wrap
-description: "Wrap an installed coding agent so its traffic goes through the local compression proxy, and unwrap it again — wrap, unwrap, list, status, with the proxy supervised on its port and the agents discovered on the machine. Use when an existing agent binary should benefit from compression without editing the agent. Not for deciding what to compress — use token-shaper (policy) or universal-compressor (content); not for installing cross-agent MCP plugins — use plugins; not for measuring the resulting saving — use metrics."
+description: "Guidance for upstream wrap, unwrap, list and status commands that route an installed agent through a compression proxy. Use to plan integration without editing the agent binary; check wrapper and destination configuration. Not for compression policy, payload compression, MCP installation or measured savings."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,12 @@ metadata:
   canonical-name: botte_wrap
 ---
 # botte-wrap — route an agent through the compression proxy
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
 
 ## Purpose
 

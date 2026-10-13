@@ -1,6 +1,6 @@
 ---
 name: agent-compression
-description: "Compress inter-agent messages into a binary wire format — 4-bit quantized vectors, a shared token dictionary learned from a corpus, delta-diff between an old and a new message, and hashing of repeated sections, with a dictionary store under ~/.botte. Deterministic, local, 0 cloud tokens. Use when two or more agents exchange structured messages repeatedly and transmission volume matters more than human readability. Not for one-shot content compression of logs or tool output — use universal-compressor; not for compressing an agent's memory — use agent-intel (mem-compress); not for the report JSON format — use ultra-compact."
+description: "Instructions for the upstream inter-agent binary transport: quantized vectors, shared dictionaries, deltas and repeated-section hashes. Use when repeated machine-facing messages need a compact wire format. Not for human-readable payloads, content compression (universal-compressor), memory compression (agent-intel) or report JSON (ultra-compact)."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,12 @@ metadata:
   canonical-name: agent_compression
 ---
 # agent-compression — inter-agent binary transport
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
 
 ## Purpose
 

@@ -1,6 +1,6 @@
 ---
 name: bootstrap
-description: "Deploy the token-saving stack into a target project — wire the botte-llm MCP server into .mcp.json, audit the project's agent directives, and write a .botte config + setup report. Use when the user wants to 'install botte', 'set up token savings on a project', reduce an existing project's token/cost usage, or onboard a repo to local-first routing. This is the capstone that makes the toolkit actually save money on real projects."
+description: "Guidance for deploying a separately installed Botte Secrete runtime into a target project: MCP configuration, directive audit, local configuration and setup report. Use when planning project onboarding. Inspect proposed configuration changes and verify host integration; this catalog does not install services or guarantee savings."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -9,8 +9,13 @@ metadata:
 ---
 # bootstrap — deploy the toolkit into a project
 
-The whole point of the toolkit is to make *real projects* cheaper to work on.
-This installs the stack into any project in one command.
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
+
+The upstream bootstrap prepares project configuration for a separately installed toolkit. Confirm runtime dependencies and host support, then inspect the resulting configuration and verify the integration before claiming it works.
 
 ## Run it
 
@@ -20,11 +25,11 @@ python -m skills.bootstrap.cli /path/to/project --create-agents-md   # scaffold 
 python -m skills.bootstrap.cli /path/to/project --scan-subnet --json
 ```
 
-## What it does (idempotent)
+## Upstream workflow to verify
 
 1. **Discover local backends** (`llm_backends`) so routing has somewhere to send work.
 2. **Wire MCP** — merges the `botte-llm` server into the project's `.mcp.json`
-   (non-destructive; keeps any existing servers). The project's agent then gains:
+   (the intended merge preserves existing servers; inspect the result). A compatible configured host may expose:
    `auto_route`, `local_chat`, `fusion`, `find_skills`, `audit_local_usage`,
    `route_task`, `discover_backends`, `list_models`.
 3. **Audit directives** (`directives_audit`) — reports the CLAUDE.md/AGENTS.md
@@ -35,10 +40,7 @@ python -m skills.bootstrap.cli /path/to/project --scan-subnet --json
 
 ## Result
 
-The project's agent now routes cheap work (classification, extraction, summaries,
-tool/skill search) to **local models for 0 cloud tokens**, escalates only the hard
-parts to the cloud (`auto_router`), and picks tools with `find_skills` instead of
-reading every skill description with the expensive model.
+After setup, verify that the host actually exposes the configured tools and that suitable local backends are reachable. The intended workflow uses local routing for appropriate tasks and configured cloud providers for others; availability, costs and savings require observation in that environment.
 
 `.mcp.json` and `.botte/` hold per-machine absolute paths, so they are gitignored
 in this repo — deploy on each machine.

@@ -1,6 +1,6 @@
 ---
 name: context-windows
-description: "Persistent context windows for feedback loops — register a window per loop step, then load only the deltas or a merged window instead of resending the whole context on every turn (step, merge, stats). Deterministic and local. Use when an agent iterates on the same context across many turns and the full resend is the cost. Not for keeping a per-agent stable prompt prefix and diffing between agents — use prefix-tree; not for file analysis across runs — use code-fingerprint."
+description: "Guidance for upstream named context windows and loop deltas (step, merge, stats). Use to plan context reuse across iterations; verify the separately installed store and its invalidation rules. Not for per-agent prompt-prefix differences (prefix-tree) or file-analysis caching (code-fingerprint)."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,12 @@ metadata:
   canonical-name: context_windows
 ---
 # context-windows — load the delta, not the loop
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
 
 ## Purpose
 

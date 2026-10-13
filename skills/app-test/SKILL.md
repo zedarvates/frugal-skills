@@ -1,6 +1,6 @@
 ---
 name: app-test
-description: "Local-first GUI/app testing by image matching (SikuliX) — turn a small JSON spec referencing your button images into a runnable SikuliX script and run it locally, using a vision NPU (Hailo-8/10) or local vision model instead of cloud vision. Use when the user wants to test a desktop/game/web app 'for real' by clicking buttons, has button images already, or mentions SikuliX, image-matching tests, or local UI tests."
+description: "Guidance for upstream image-matching GUI tests with OculiX/SikuliX: prepare a JSON scenario, button images, runner and evidence checks. Use for local desktop, game or web UI testing. Runtime, Java, screenshots and optional local vision hardware are separate prerequisites; an installation is not proof of a passed test."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -9,9 +9,13 @@ metadata:
 ---
 # app-test — test apps locally by clicking their buttons
 
-When you build a UI you already have the button images, so an image-matching bot
-can drive it — no cloud vision tokens needed. A tiny JSON spec → a runnable
-SikuliX script.
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
+
+With supplied button images, the upstream image-matching workflow can generate a SikuliX script from a JSON scenario. Image files, the generator and the GUI runner must be available separately.
 
 ## Spec → script → run
 
@@ -57,16 +61,11 @@ https://github.com/oculix-org/Oculix/releases and place it at
 bundle; it executes it via `java -jar <jar> -r <bundle> -c` when a runner is
 found, else it reports how to install one.
 
-Verified: a generated bundle runs end-to-end on OculiX 3.0.4
-(`oculixide-3.0.4-windows.jar`) — Jython executes the steps and returns the exit
-code (0 = pass).
+Verify a generated bundle against your installed OculiX/SikuliX version. This catalog includes no end-to-end runner evidence; a nominal runner exit code alone is not proof that all scenario checks passed.
 
 ## Why local / economical
 
-Image matching is CPU-cheap and needs no model. For richer checks (is this screen
-*semantically* right?), point verification at a **Hailo-8/10 NPU** or a local
-vision model via [[llm-backends]] instead of a paid cloud vision API — 0 cloud
-tokens. The generator is deterministic and unit-tested; the GUI run is local.
+Image matching can operate without a vision model. Richer semantic checks require a separately configured vision backend, such as a compatible NPU or local model through [[llm-backends]]. Measure usage and validate the generated script and GUI run; this catalog supplies no generator tests or executed-run evidence.
 
 Every executed run also emits `*-evidence.json`. The manifest binds the scenario
 to per-step screenshot SHA-256 digests without embedding raw pixels, paths, or

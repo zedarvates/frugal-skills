@@ -1,6 +1,6 @@
 ---
 name: ambient-hud
-description: "Show the scoped ambient-status-v1 metrics in a local, top-center Windows overlay. Use when the user wants passive token/routing visibility outside the terminal."
+description: "Instructions for the upstream ambient-status-v1 Windows overlay and its scoped metrics. Use to plan passive token and routing visibility outside the terminal. Requires a separately installed compatible runtime and valid local ledgers; missing measurements stay unavailable."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,6 +8,12 @@ metadata:
   canonical-name: ambient_hud
 ---
 # Ambient HUD
+
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
+Commands, APIs and runtime behavior described below are conditional examples for a compatible upstream installation; they are not evidence of execution in this package.
 
 Open the read-only top-center overlay manually:
 
@@ -33,9 +39,9 @@ python -m skills.ambient_hud --print .        # headless one-line preview
 
 ## Boundaries
 
-- Pure stdlib (`tkinter`), with no service, browser, network, or dependency.
+- The upstream overlay uses `tkinter`; opening its full report may launch a browser. Check the separately installed runtime and its dependencies.
 - Reads `ambient-status-v1` directly; it never parses prompts or session text.
-- Consumes only snapshots accepted by the bundled stdlib contract validator.
+- Consumes only snapshots accepted by the upstream contract validator.
 - Never exposes project paths in the window.
 - Missing measurements remain `unavailable`; they are not rendered as zero.
 - Partial or invalid local ledgers degrade one scope without hiding the other.

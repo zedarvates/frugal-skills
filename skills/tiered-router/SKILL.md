@@ -1,6 +1,6 @@
 ---
 name: tiered-router
-description: "Five-level model selection with cost estimation and automatic downgrade — a free level served by local accelerators and pure computation, a local model level, then cheap, standard and premium cloud levels, each with its token and cost estimate produced before the call. Use before an LLM call when the cost of the chosen tier must be known and over-provisioning must be corrected automatically. Not for the micro-NN complexity router — use nn-router; not for placing a task on local hardware by task type — use local-router."
+description: "Instructions for upstream model-tier planning using task requirements, configured endpoints, usage estimates and budgets. Local computation also has hardware and operating costs; measure actual provider usage. Not for micro-model classification or task-type hardware placement."
 license: MIT
 metadata:
   version: "1.0.0"
@@ -9,6 +9,10 @@ metadata:
 ---
 # Tiered Model Router (P14)
 
+## Package scope and prerequisites
+
+This catalog ships instructions, not the executable runtime. Python modules, scripts, local services and optional tools named below must be installed separately from the upstream project. Check their availability before running commands; if they are missing, explain the prerequisite instead of claiming execution or results. The host agent may use model tokens while following these instructions.
+
 ## When NOT to use
 
 - You want the classifier-driven tier decision rather than the 5-level cost
@@ -16,15 +20,16 @@ metadata:
 - You want a task placed on local hardware by its type — use local_router.
 5-level intelligent model selection with cost estimation and auto-downgrade.
 
-**Trigger:** Before EVERY LLM call — route through tiered router first.
+**Trigger:** When the task calls for model-tier planning; do not override the host's model selection or the user's task scope automatically.
 
 **5 Levels:**
 ```
-L0 FREE (0 tok):    Hailo-8, LocalAI TTS/STT, pure math/vectors
-L1 LOCAL (~100 tok): LocalAI Gemma-4 / Ollama — simple Q&A
-L2 CHEAP (~500 tok): Cloud small — code review, bug detection
-L3 STANDARD (~2K tok): Cloud standard — architecture, complex reasoning
-L4 PREMIUM (~8K tok): Cloud best — security audit, system design
+L0 COMPUTATION: configured local algorithms or adapters
+L1 LOCAL:       configured local model for suitable tasks
+L2 CHEAP:       configured small hosted model
+L3 STANDARD:    configured general hosted model
+L4 PREMIUM:     configured higher-capability hosted model
+Actual input/output tokens, quality and costs must be measured.
 ```
 
 **Features:**
@@ -35,4 +40,4 @@ L4 PREMIUM (~8K tok): Cloud best — security audit, system design
 - Agent-to-agent delta compression
 
 **Module:** `skills/tiered_router`
-**Typical savings:** 95-99% vs all-PREMIUM
+**Measurement:** compare actual quality and costs with an explicit baseline; no typical savings are established here.
