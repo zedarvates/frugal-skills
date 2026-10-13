@@ -4,12 +4,15 @@
 import argparse
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import re
 import shutil
 import subprocess
 import tempfile
+import unicodedata
+import xml.etree.ElementTree as ET
 import zipfile
 
 
@@ -27,6 +30,88 @@ def require(condition, message):
         raise ValueError(message)
 
 
+def validate_interface(interface):
+    """Guard the stricter directory listing fields before ZIP ingestion.
+
+    This is a local metadata guard, not the portal's safety, identity or review
+    checks. Field types and final limits follow the official submission-errors
+    reference linked in docs/CODEX.md.
+    """
+    require(isinstance(interface, dict), "Missing plugin interface")
+
+    def text_field(value, label, limit):
+        require(isinstance(value, str) and bool(value.strip()),
+                f"{label} must be a non-empty string")
+        require(len(value) <= limit, f"{label} exceeds {limit} characters")
+        require(not any(unicodedata.category(char) in {"Cc", "Cf", "Zl", "Zp"}
+                        for char in value), f"{label} must use supported single-line text")
+
+    for field, limit in (("displayName", 30), ("shortDescription", 30), ("developerName", 80)):
+        text_field(interface.get(field), f"interface.{field}", limit)
+    require(isinstance(interface.get("longDescription"), str)
+            and 0 < len(interface["longDescription"].strip()) <= 4000,
+            "interface.longDescription must be a non-empty string of at most 4000 characters")
+    capabilities = interface.get("capabilities")
+    require(isinstance(capabilities, list) and 1 <= len(capabilities) <= 20,
+            "interface.capabilities must be a non-empty array of at most 20 strings")
+    for capability in capabilities:
+        text_field(capability, "interface.capabilities entry", 120)
+    prompts = interface.get("defaultPrompt")
+    if isinstance(prompts, str):
+        prompts = [prompts]
+    require(isinstance(prompts, list) and 1 <= len(prompts) <= 3,
+            "interface.defaultPrompt must be a string or a non-empty array of at most 3 strings")
+    normalized = set()
+    for prompt in prompts:
+        text_field(prompt, "interface.defaultPrompt entry", 128)
+        require("@" not in prompt, "interface.defaultPrompt must not contain app @mentions")
+        value = " ".join(unicodedata.normalize("NFKC", prompt).split())
+        require(value not in normalized, "interface.defaultPrompt entries must be unique")
+        normalized.add(value)
+
+
+def branding_files(interface):
+    """Validate the two original SVG assets against the documented icon rules."""
+    files = []
+    for field in ("composerIcon", "logo"):
+        reference = interface.get(field)
+        require(isinstance(reference, str) and reference.startswith("./")
+                and ".." not in Path(reference).parts and "\\" not in reference,
+                f"interface.{field} must be a ./-prefixed internal asset path")
+        path = ROOT / reference
+        require(path.resolve().is_relative_to(ROOT.resolve()) and path.is_file()
+                and not path.is_symlink(), f"Missing or external branding asset: {reference}")
+        require(path.suffix == ".svg", "Review any change from the package's SVG branding format")
+        data = path.read_bytes()
+        require(len(data) <= 5 * 1024 * 1024, f"Branding asset exceeds 5 MiB: {reference}")
+        text = data.decode("utf-8")
+        require("<!DOCTYPE" not in text and "<!ENTITY" not in text,
+                f"Branding SVG must not declare entities: {reference}")
+        svg = ET.fromstring(text)
+        require(svg.tag == "{http://www.w3.org/2000/svg}svg", f"Invalid SVG root: {reference}")
+        dimensions = []
+        if "width" in svg.attrib or "height" in svg.attrib:
+            dimensions.append((float(svg.attrib["width"]), float(svg.attrib["height"])))
+        if "viewBox" in svg.attrib:
+            box = [float(value) for value in re.split(r"[\s,]+", svg.attrib["viewBox"].strip())]
+            require(len(box) == 4 and all(math.isfinite(value) for value in box),
+                    f"Invalid SVG viewBox: {reference}")
+            dimensions.append((box[2], box[3]))
+        require(dimensions, f"Missing numeric SVG dimensions: {reference}")
+        require(all(math.isfinite(width) and math.isfinite(height)
+                    and width == height and width >= 48 for width, height in dimensions),
+                f"Branding SVG must be square and at least 48 by 48: {reference}")
+        for element in svg.iter():
+            require(element.tag not in {"{http://www.w3.org/2000/svg}script",
+                                        "{http://www.w3.org/2000/svg}foreignObject"},
+                    f"Branding SVG must contain only static geometry: {reference}")
+            require(not any(key.lower().startswith("on") or key.endswith("href")
+                            for key in element.attrib),
+                    f"Branding SVG must not contain scripts or external resources: {reference}")
+        files.append(path)
+    return files
+
+
 def package_files():
     portable = read_json(ROOT / "plugin.json")
     codex = read_json(ROOT / ".codex-plugin/plugin.json")
@@ -39,7 +124,10 @@ def package_files():
     require(re.fullmatch(r"\d+\.\d+\.\d+", codex.get("version", "")),
             "Use a stable semantic plugin version")
     require(codex.get("skills") == "./skills/", "Unexpected skill path")
-    require(not portable.get("extensions", {}).get("com.openai"),
+    validate_interface(codex.get("interface"))
+    assets = branding_files(codex["interface"])
+    extensions = portable.get("extensions", {})
+    require(isinstance(extensions, dict) and "com.openai" not in extensions,
             "An inline OpenAI overlay would replace the compatibility overlay")
     require(not {"mcpServers", "apps", "hooks"}.intersection(codex),
             "This package must remain skills-only")
@@ -84,7 +172,7 @@ def package_files():
     files = [ROOT / name for name in (
         "plugin.json", ".codex-plugin/plugin.json", "LICENSE",
         "THIRD_PARTY_NOTICES.md", "docs/CODEX.md",
-    )] + skills
+    )] + skills + assets
     for path in files:
         require(path.is_file() and not path.is_symlink(), f"Invalid package file: {path}")
     return codex, sorted(files)

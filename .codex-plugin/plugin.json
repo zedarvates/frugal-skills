@@ -10,10 +10,19 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Frugal Skills",
-    "shortDescription": "Local-first workflows for context, routing and code review",
+    "shortDescription": "Local-first skill workflows",
     "longDescription": "115 instruction-based workflows for context budgets, compression, routing, code review and operations. This package contains skill instructions and provenance notices; it does not install the upstream Python implementations or external tools described by some skills.",
     "developerName": "Zedarvates",
     "category": "Productivity",
+    "capabilities": [
+      "Select skill instructions for a context budget",
+      "Guide local-first routing and code review workflows"
+    ],
+    "defaultPrompt": [
+      "Find Frugal Skills workflows for planning a context budget and explain the required runtime."
+    ],
+    "composerIcon": "./assets/frugal-icon.svg",
+    "logo": "./assets/frugal-logo.svg",
     "websiteURL": "https://github.com/zedarvates/frugal-skills"
   }
 }

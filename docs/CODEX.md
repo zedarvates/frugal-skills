@@ -46,6 +46,7 @@ Choose either whole-catalog plugin installation or individual skills with
 
 ```sh
 python3 scripts/package_plugin.py --check
+python3 -m unittest discover -s tests
 python3 scripts/package_plugin.py --check --smoke-codex
 codex plugin marketplace add /absolute/path/to/frugal-skills
 codex plugin add frugal-skills@frugal-skills-marketplace
@@ -63,6 +64,18 @@ manifest describe the same identity and version. The portable manifest deliberat
 omits `extensions.com.openai` so Codex can use the compatibility manifest's listing
 and skill path.
 
+The compatibility manifest also includes descriptive `interface.capabilities`
+and a starter prompt in `interface.defaultPrompt`. Capabilities are a string list;
+plugin starter prompts use camelCase `defaultPrompt` (a string or string list).
+This package uses the documented camelCase plugin field; optional skill-level
+`agents/openai.yaml` uses snake_case `default_prompt`. The package guard checks the
+stricter final listing lengths, including a 30-character short description and
+128-character prompts. Passing this local check or installing with the CLI does
+not complete the portal's safety scans, identity checks or publication review.
+The package also includes original SVG composer and listing icons. Both referenced
+assets are square, at least 48 by 48, under 5 MiB, and validated as UTF-8 SVG with
+numeric dimensions. The guard rejects missing assets and paths outside the plugin.
+
 ## Build the release archive
 
 ```sh
@@ -71,7 +84,8 @@ python3 scripts/package_plugin.py
 
 The deterministic ZIP is written to `dist/frugal-skills-1.0.0.zip`. Its single
 top-level `frugal-skills/` directory contains the manifests, LICENSE,
-THIRD_PARTY_NOTICES.md, this installation guide, and all 115 SKILL.md files. It
+THIRD_PARTY_NOTICES.md, this installation guide, both SVG branding assets, and all
+115 SKILL.md files. It
 contains no Git metadata, personal configuration, development helpers or MCP
 configuration. Preserve THIRD_PARTY_NOTICES.md; MIT applies to this repository,
 and it does not relicense external dependencies or upstream copied material.
