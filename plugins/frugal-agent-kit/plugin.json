@@ -1,0 +1,50 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "frugal-agent-kit",
+  "version": "0.1.0",
+  "description": "Self-contained, read-only skills for planning efficient agent work, minimizing context, and checking completion evidence.",
+  "author": {
+    "name": "zedarvates",
+    "url": "https://github.com/zedarvates"
+  },
+  "homepage": "https://github.com/zedarvates/frugal-skills",
+  "repository": "https://github.com/zedarvates/frugal-skills",
+  "license": "MIT",
+  "keywords": [
+    "agent",
+    "skills",
+    "context",
+    "cost-awareness",
+    "evidence"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Frugal Agent Kit",
+        "shortDescription": "Plan leaner agent workflows",
+        "longDescription": "A skills-only companion to the public Frugal Skills project. Use it to select relevant context, compare local versus external tools and request evidence before declaring tasks complete. Produces reviewable recommendations, not automated tool execution. It does not access files or services on its own, install the upstream Python modules, measure real token usage, guarantee savings, or make autonomous changes. No account or MCP server required.",
+        "developerName": "zedarvates",
+        "category": "Developer Tools",
+        "capabilities": [
+          "Trim task context",
+          "Review tool routing",
+          "Verify completion evidence"
+        ],
+        "websiteURL": "https://github.com/zedarvates/frugal-skills",
+        "supportURL": "https://github.com/zedarvates/frugal-skills/issues",
+        "brandColor": "#155E63",
+        "composerIcon": "./assets/icon.svg",
+        "logo": "./assets/logo.svg",
+        "defaultPrompt": [
+          "Review what context is really needed for my next coding task.",
+          "Choose a safe low-cost route for this agent workflow.",
+          "Check if this completion report has sufficient evidence."
+        ]
+      },
+      "onboardingSkill": "./skills/frugal-agent-start/SKILL.md",
+      "publication": {
+        "release_notes": "Initial skills-only preview with three read-only review workflows and one onboarding skill. No MCP, local scripts, network integrations or payments."
+      }
+    }
+  }
+}
